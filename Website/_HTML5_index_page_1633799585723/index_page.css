@@ -1,0 +1,132 @@
+/*
+	@name index_page
+*/
+/* Only edit this if you know what you are doing! */
+body { margin: 0px; padding: 0px; font-family:"Arial"; overflow-x:hidden; }
+
+/* Only edit this if you know what you are doing! */
+img { position: absolute; display: block; margin: 0px; border: none; padding: 0px; }
+
+/* Only edit this if you know what you are doing! */
+div { position: absolute; }
+
+#content-container { display: table; position: relative;  margin-left: auto; margin-right: auto;  }
+
+#content-container > div{ position: relative; top:inherit; }
+#page_index_page_ek1 {
+	top: 0px;
+	left: 0px;
+	width: 1920px;
+	height: 970px;
+}
+
+#_bg__index_page_ek2 {
+	top: 0px;
+	left: 0px;
+	width: 1920px;
+	height: 970px;
+	background:rgba(255,255,255,255);
+}
+
+
+#image_1 {
+	top: 174px;
+	left: 695px;
+	width: 1225px;
+	height: 736px;
+}
+
+#group_1 {
+	top: 56px;
+	left: 1303px;
+	width: 485px;
+	height: 63px;
+}
+
+#rectangle_1 {
+	top: 1px;
+	left: 0px;
+	width: 229px;
+	height: 62px;
+	-ms-border-radius: 31px;
+	-o-border-radius: 31px;
+	-moz-border-radius: 31px;
+	-webkit-border-radius: 31px;
+	border-radius: 31px;
+	background:rgba(255,196,16,255);
+}
+
+
+#rectangle_2 {
+	top: 0px;
+	left: 256px;
+	width: 231px;
+	height: 64px;
+	-ms-border-radius: 31px;
+	-o-border-radius: 31px;
+	-moz-border-radius: 31px;
+	-webkit-border-radius: 31px;
+	border-radius: 31px;
+	border: 1px solid #ffc410;
+	background:rgba(255,255,255,0);
+}
+
+
+#login {
+	top: 16px;
+	left: 328px;
+	width: 81px;
+	height: 47.5px;
+	overflow: hidden;
+	font-family: Raleway;
+	font-size: 25px;
+	text-align: center;
+	color:#000000;
+}
+
+
+#register {
+	top: 16px;
+	left: 50px;
+	width: 127px;
+	height: 48px;
+	overflow: hidden;
+	font-family: Raleway;
+	font-size: 26px;
+	text-align: center;
+	color:#000000;
+}
+
+
+#download {
+	top: 830px;
+	left: 257px;
+	width: 135px;
+	height: 135px;
+}
+
+
+#lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry__lorem_ipsum_has_been_the_industry_s_standard_dummy_text_ever_since_the_1500s__when_an_unknown_printer_took_a_galley_of_type_and_scrambled_it_to_make_a_type_specimen_book__it_has_sur {
+	top: 219px;
+	left: 132px;
+	width: 390px;
+	height: 663.5px;
+	overflow: hidden;
+	font-family: Segoe UI;
+	font-size: 25px;
+	text-align: left;
+	color:#000000;
+	text-align: justify;
+}
+
+
+#image_2 {
+	top: 48px;
+	left: 132px;
+	width: 170px;
+	height: 80px;
+}
+
+
+
+/* Add your custom CSS here */
