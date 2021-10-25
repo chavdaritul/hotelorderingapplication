@@ -3,7 +3,7 @@
         <style>
             body{
                 margin: 0;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.385), rgba(0, 0, 0, 0.385)), url('images/register_bg.jpg');
+                background-image: linear-gradient(rgba(0, 0, 0, 0.385), rgba(0, 0, 0, 0.385)), url('images/login_bg.jpg');
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: 100%;
@@ -24,7 +24,6 @@
             }
             #center{
                 transform: translate(0%, -5%);
-                margin: 0% 0% 0% 25%;
                 text-align: center;
                 width: 50%;
                 top: 5%;
@@ -32,7 +31,7 @@
                 height: 100%;
             }
             .center_image{
-                width: 18%;
+                width: 15%;
                 height: auto;
             }
             input[type=text],[type=password],[type=email]{
@@ -65,10 +64,8 @@
     <body>
     
         <div id="center">
-            </br>
-            </br>
-            </br>
-            <img class="center_image" src="./images/register.png">
+            </br></br></br></br></br></br></br></br></br></br>
+            <img class="center_image" src="./images/login.png">
             </br>
             <form method="POST" action="">
                 <ul>
@@ -76,20 +73,10 @@
                         <img src="./images/user.png" class="user_input_ico">
                         <input type="text" placeholder="USER-ID" name="userid">
                     </li>
-                    </br>
-                    <li>
-                        <img src="./images/email.png" class="user_input_ico">
-                        <input type="email" placeholder="EMAIL-ID" name="emailid">
-                    </li>
-                    </br>                
+                    </br>               
                     <li>
                         <img src="./images/lock.png" class="user_input_ico">
                         <input type="password" placeholder="PASSWORD" name="password">
-                    </li>
-                    </br>  
-                    <li>
-                        <img src="./images/lock.png" class="user_input_ico">
-                        <input type="password" placeholder="CONFIRM PASSWORD" name="confirmpassword">
                     </li>
                     </br>  
                     <li>
@@ -98,7 +85,9 @@
                 </ul>
             </form>
             <p style="color: rgb(200, 200, 200); font-family: Raleway; font-size: 1.6rem;">
-                Already have an account? <a href="/login" style="color: rgb(150, 150, 150); text-decoration: none;">login</a>
+                <a href="#" style="color: rgb(150, 150, 150); text-decoration: none;">Forgot Password? </a>
+                </br>
+                Create an account? <a href="/register" style="color: rgb(150, 150, 150); text-decoration: none;">register</a>
             </p>
             </br>   
         </div>
