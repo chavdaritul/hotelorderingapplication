@@ -15,7 +15,6 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 mysql = MySQL(app)
 
-@app.route('/')
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     cur = mysql.connection.cursor()
@@ -27,22 +26,58 @@ def register():
         password = userDetails['password']
         confirmpassword = userDetails['confirmpassword']
 
-        if password == confirmpassword:
-            # Create cursor to connect to database and execute CRUD (insert, update and delete) operations
-            password = bcrypt.generate_password_hash(password).decode('UTF-8')
+        SpecialSym =['$', '@', '#', '%']
+        val = True
+
+        cur.execute("SELECT * FROM `customers` WHERE userid='%s'" % userid)
+        data = cur.fetchone()
+        print('\n')
+        if data:
+            print('Username already Exist.')
+            val = False
+
+        if len(password) < 6:
+            print('Length should be atleast 6.')
+            val = False
             
-            cur.execute('INSERT into customers(userid, emailid, password) values(%s, %s, %s)', (userid, emailid, password))
-            mysql.connection.commit()
-            cur.close()
-            return redirect(url_for('login'))
-        else:
-            print('Error')
+        if len(password) > 20:
+            print('Length should not be grater than 8.')
+            val = False
+            
+        if not any(char.isdigit() for char in password):
+            print('Atleast one numeric.')
+            val = False
+            
+        if not any(char.isupper() for char in password):
+            print('Atleast one uppercase.')
+            val = False
+            
+        if not any(char.islower() for char in password):
+            print('Atleast one lowercase.')
+            val = False
+            
+        if not any(char in SpecialSym for char in password):
+            print('Sould contain one of these symbol : $@#%.')
+            val = False
+        if val:
+            if password == confirmpassword:
+                # Create cursor to connect to database and execute CRUD (insert, update and delete) operations
+                password = bcrypt.generate_password_hash(password).decode('UTF-8')
+                
+                cur.execute('INSERT into customers(userid, emailid, password) values(%s, %s, %s)', (userid, emailid, password))
+                mysql.connection.commit()
+                cur.close()
+                return redirect(url_for('login'))
+            else:
+                print('Error')
+
     return render_template('register.html')
             
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     cur = mysql.connection.cursor()
+    print('\n')
     if request.method == 'POST':
         userDetails = request.form
         userid = userDetails['userid']
@@ -51,7 +86,6 @@ def login():
         data = cur.fetchone()
         cur.close()
         if data:
-            print(bcrypt.check_password_hash(data[3], password))
             if bcrypt.check_password_hash(data[3], password):
                 session['usedid'] = data[1]
                 return redirect(url_for('customer'))
@@ -64,7 +98,11 @@ def login():
 
 @app.route('/customer')
 def customer():
-    return render_template('customer.html')
+    user = session['usedid']
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM `customers` WHERE userid='%s'" % user)
+    data = cur.fetchall()
+    return render_template('customer.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
