@@ -15,6 +15,11 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 mysql = MySQL(app)
 
+@app.route('/')
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     cur = mysql.connection.cursor()
@@ -86,8 +91,8 @@ def login():
         data = cur.fetchone()
         cur.close()
         if data:
-            if bcrypt.check_password_hash(data[3], password):
-                session['usedid'] = data[1]
+            if bcrypt.check_password_hash(data[5], password):
+                session['userid'] = data[1]
                 return redirect(url_for('customer'))
             else:
                 return '<b>Incorrect Password</b>'
@@ -96,13 +101,34 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/customer')
+@app.route('/customer', methods=['GET', 'POST'])
 def customer():
-    user = session['usedid']
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM `customers` WHERE userid='%s'" % user)
-    data = cur.fetchall()
-    return render_template('customer.html', data=data)
+    if session.get('userid') == None:
+        return redirect(url_for('login'))
+    else:
+        cur = mysql.connection.cursor()
+        if request.method == 'POST':
+            # Request Data from HTML file from
+            userDetails = request.form
+            userid = session['userid']
+            emailid = userDetails['emailid']
+            address = userDetails['address']
+            phone = userDetails['phone']
+            cur.execute('UPDATE customers SET emailid = %s , address = %s , phone = %s where userid == %s', (emailid, address, phone, userid))
+            mysql.connection.commit()
+            cur.close()
+        print(session['userid'])
+        user = session['userid']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM `customers` WHERE userid='%s'" % user)
+        data = cur.fetchall()
+        return render_template('customer.html', data=data)
+
+@app.route("/logout")
+def logout():
+    session.pop('userid', None)
+    session.clear()
+    return redirect(url_for('home'))   
 
 if __name__ == '__main__':
     app.run(debug=True)
