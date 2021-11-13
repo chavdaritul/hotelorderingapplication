@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            ul{
+                float: right;
+                list-style-type: none;
+                margin-top: 30px;
+                margin-right: 30px;
+            }
+            ul li{
+                display: inline-block;
+            }
+            ul li a{
+                text-decoration: none;
+                color: black;
+                padding: 5px 20px;
+                border-radius: 8px;
+                font-family: Bebas Neue;
+                font-size: 30px;
+                transition: 0.6s ease;
+            }
+            .active{
+                background-color: black;
+                color: white;
+            }
+            ul li a:hover{
+                background-color: black;
+                color: white;
+            }
+            .cust_header{
+                color: #A163F5;
+                float: left;
+                width: auto;
+                margin-top: 20px;
+                margin-left: 20px;
+                font-family: Bebas Neue;
+                font-size: 50px;
+            }
+            .center_image{
+                width: 15%;
+                height: auto;
+            }
+            .homepg_div{
+                position: absolute;
+            }
+            .homepg_bg{
+                margin-top: 7%;
+                margin-left: 39.35%;
+                width: 95%;
+                height: auto;
+            }
+            .homepg_div_cont{
+                position: absolute;
+                margin-top: 11%;
+                margin-left: 3%;
+                font-family: Bebas Neue;
+                font-size: 25px;
+                width: 23%;
+                height: 60%;
+                text-align: justify;
+            }
+            .down_div{
+                position: absolute;
+                margin-top: 43%;
+                margin-left: 12%;
+            }
+            .down{
+                width: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class='cust_header'>
+                <a href="/home"><img class="center_image" src="./images/logo.png"></a>
+            </div>
+            <div class="main">
+                <ul>
+                    <li><a href="#">Order</a></li>
+                    <li><a href="/login">Profile</a></li>
+                    <li><a href="/login">Wallet</a></li>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+            </div>
+        </header>
+        <div class="homepg_div">
+            <img class="homepg_bg" src="./images/homepg_img.png">
+        </div>
+        <div class="homepg_div_cont">
+            <p>Hotel Ordering Application is developed to minimize the effort in the traditional way to
+                receive food orders. It will be a website so that it can be easily accessible on every device.
+                HTML, CSS, and JavaScript will be used to design the front-end, phpMyAdmin(SQL) will be
+                used for the database in which items information, order history, employee data, and much
+                more will be stored. Apart from that user login, passwords will be encrypted for security
+                measures. Hotel Ordering Application is developed to minimize the effort in the traditional way to
+                receive food orders. It will be a website so that it can be easily accessible on every device.
+                HTML, CSS, and JavaScript will be used to design the front-end, phpMyAdmin(SQL) will be
+                used for the database in which items information, order history, employee data, and much
+                more will be stored.</p>
+        </div>
+        <div class="down_div">
+            <a href="/login"><img class="down" src="./images/down.png"></a>
+        </div>
+    </body>
+</html>

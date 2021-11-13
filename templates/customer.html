@@ -103,15 +103,22 @@
                     <li><a href="#">Change Password</a></li>
                     <li><a href="#">Order History</a></li>
                     <li><a href="#">Payment</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
         </header>
         <div class="profile">
             <form method="post" action="">
                 <p><img src="./images/profile_bg.png" class="img"></p>
-                <p><input type="text" placeholder="USER-ID : {{data[0][1]}}" name="name"></p>
-                <p><input type="text" placeholder="EMAIL-ID : {{data[0][2]}}" name="address"></p>
+                <p><input type="text" placeholder="USER-ID : {{data[0][1]}}" name="userid"></p>
+                <p><input type="text" placeholder="EMAIL-ID : {{data[0][2]}}" name="emailid"></p>
+                {% if data[0][3] == '' and data[0][4] == '' %}
+                <p><input type="text" placeholder="Address" name="address"></p>
+                <p><input type="text" placeholder="Phone" name="phone"></p>
+                {% else %}
+                <p><input type="text" placeholder="Address : {{data[0][3]}}" name="address"></p>
+                <p><input type="text" placeholder="Phone : {{data[0][4]}}" name="phone"></p>
+                {% endif %}
                 <p><input type="Submit" value="Save Changes"></p>
             </form>
         </div>
