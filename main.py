@@ -20,6 +20,10 @@ mysql = MySQL(app)
 def home():
     return render_template('home.html')
 
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     cur = mysql.connection.cursor()
