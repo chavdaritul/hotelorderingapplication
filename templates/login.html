@@ -1,87 +1,33 @@
  <html>
     <head>
-        <style>
-            body{
-                margin: 0;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.385), rgba(0, 0, 0, 0.385)), url('images/login_bg.jpg');
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: 100%;
-                width: 100%;
-                height: 100%;
-                
-            }
-            #left, #center, #right{
-                position: absolute;
-            }
-            #left{
-                text-align: left;
-                z-index: 1;
-            }
-            #right{
-                text-align: right;
-                z-index: 2;
-            }
-            #center{
-                margin-left: 50%;
-                transform: translate(0%, -5%);
-                text-align: center;
-                width: 50%;
-                top: 5%;
-                background-color: white;
-                height: 100%;
-            }
-            .center_image{
-                width: 15%;
-                height: auto;
-            }
-            input[type=text],[type=password],[type=email]{
-                width: 49%;
-                height: 5.2%;
-                margin-top: 30px;
-                border-radius: 50px;
-                font-family: Bebas Neue;
-                font-size: 1.4rem;
-                padding-left: 55px;
-                border: 0;
-                background-color: rgb(242, 242, 242);
-                outline: none;
-                color: rgb(150, 150, 150);
-            }
-            ::placeholder{
-                color: rgb(150, 150, 150)
-            }
-            .user_input_ico{
-                position: absolute;
-                height: 3.2%;
-                padding-top: 38px;
-                padding-left: 15px;
-            }
-            ul {
-                list-style-type: none;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="../static/css/login.css">
     </head>
     <body>
-    
+
         <div id="center">
             </br></br></br></br></br></br></br></br></br></br>
-            <a href="/home"><img class="center_image" src="./images/login.png"></a>
+            <a href="/home"><img class="center_image" src="../static/images/login.png"></a>
             </br>
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-{{category}}">Error: {{ message }}</div>
+            {% endfor %}
             <form method="POST" action="">
                 <ul>
                     <li>
-                        <img src="./images/user.png" class="user_input_ico">
-                        <input type="text" placeholder="USER-ID" name="userid">
+                        <img src="../static/images/user.png" class="user_input_ico">
+                        <input type="text" placeholder="EMAIL ID" name="emailId" id="emailId">
                     </li>
-                    </br>               
+                   <li>
+                        <span id="emailIdMsg" class="badge displayBadge" style="color: red">
+                         </span>
+                    </li>
                     <li>
-                        <img src="./images/lock.png" class="user_input_ico">
+                        <img src="../static/images/lock.png" class="user_input_ico">
                         <input type="password" placeholder="PASSWORD" name="password">
                     </li>
                     </br>  
                     <li>
-                        <input type="image" src="./images/next.png" alt='Submit' width="22%">
+                        <input type="image" src="../static/images/next.png" alt='Submit' width="22%">
                     </li>
                 </ul>
             </form>
@@ -92,6 +38,6 @@
             </p>
             </br>   
         </div>
-
+         <script src="../static/scripts/register.js"></script>
     </body>
 </html>

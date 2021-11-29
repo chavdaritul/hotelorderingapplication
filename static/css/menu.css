@@ -1,0 +1,148 @@
+ *{
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    overflow: hidden;
+    margin-left: 15%;
+    border-bottom: 1px solid purple;
+    margin-right: 15%;
+    z-index: 1;
+}
+
+.navbar a {
+    float: right;
+    font-family: Bebas Neue;
+    font-size: 25px;
+    color: purple;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    font-family: Bebas Neue;
+    font-size: 25px;
+    float: left;
+    overflow: hidden;
+    border-right: 1px solid purple;
+}
+
+.dropdown .dropbtn {
+    font-family: Bebas Neue;
+    font-size: 25px;
+    color: purple;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: purple;
+    color: white;
+    font-family: Bebas Neue;
+    font-size: 25px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: purple;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: purple;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+#row{
+    padding-top: 0%;
+}
+.column{
+    width: 35%;
+    height: 25%;
+    display: inline-block;
+    margin-top: 1%;
+    margin-left: 1%;
+    border-width: 5px;
+    border: 1px solid rgb(255, 179, 116);
+    border-radius: 10px;
+}
+.dish{
+    font-family: Bebas Neue;
+    font-size: 30px;
+    padding-top: 5%;
+    padding-left: 5%;
+    color: purple;
+}
+.discription{
+    font-family: Raleway;
+    font-size: 20px;
+    padding-left: 5%;
+    width: 50%;
+    color: purple;
+}
+.price{
+    font-family: Raleway;
+    font-size: 20px;
+    padding-left: 5%;
+    margin-top: auto;
+    color: purple;
+}
+.left{
+    margin-left: 14.5%;
+}
+.img{
+    width: 37%;
+    height: 100%;
+    float: right;
+    transform: translate(0%, -50.5%);
+    border-radius: 0px 10px 10px 0px;
+}
+.info_click{
+    text-decoration: none;
+    color: white;
+    background-color: purple;
+    margin-left: 5%;
+    border-radius: 5px;
+    font-family: Bebas Neue;
+    font-size: 25px;
+    transition: 0.4s ease;
+    padding: 5px 15px;
+}
+.info_click:hover{
+    color: purple;
+    background-color: white;
+    border: 1px solid purple;
+}
+.mains, .starter{
+    font-family: Bebas Neue;
+    font-size: 36px;
+    margin-left: 15%;
+    margin-top: 1%;
+    color: purple;
+}
+.t_description{
+    font-family: Raleway;
+    font-size: 20px;
+    margin-left: 15%;
+    color: purple;
+}
