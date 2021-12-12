@@ -14,33 +14,6 @@ bcrypt = Bcrypt()
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif']) 
 
-def w_messagebox(message):
-    window = Tk()
-    # window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
-    window.withdraw()
-    messagebox.showwarning('Warning', message)
-    window.deiconify()
-    window.destroy()
-    window.quit()
-
-def i_messagebox(message):
-    window = Tk()
-    # window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
-    window.withdraw()
-    messagebox.showinfo('Information', message)
-    window.deiconify()
-    window.destroy()
-    window.quit()
-
-def e_messagebox(message):
-    window = Tk()
-    # window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
-    window.withdraw()
-    messagebox.showerror('Error', message)
-    window.deiconify()
-    window.destroy()
-    window.quit()
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -92,7 +65,7 @@ def register():
             return render_template('register.html')
 
         for i in name.split(' '):
-            if name.isalpha() == False:
+            if i.isalpha() == False:
                 flash('Name should be alphabets only.')
                 return render_template('register.html')
 
@@ -124,13 +97,9 @@ def register():
                         (name, emailid, password))
             mysql.connection.commit()
             cur.close()
-            return redirect(url_for('menu'))
+            return redirect(url_for('login'))
         else:
             return render_template('register.html')
-
-        mysql.connection.commit()
-        cur.close()
-        return redirect(url_for('login'))
 
     return render_template('register.html')
             
@@ -149,7 +118,10 @@ def login():
         if data:
             if bcrypt.check_password_hash(data[2], password):
                 session['id'] = data[0]
-                return redirect(url_for('customer'))
+                if data[0] == 1:
+                    return redirect(url_for('admin'))
+                else: 
+                    return redirect(url_for('customer'))
             else:
                 flash("Incorrect Password")
                 return render_template('login.html')
@@ -157,7 +129,6 @@ def login():
             flash('No Data Found!')
             return render_template('login.html')
     else:
-        print('mainelse')
         return render_template('login.html')
 
 @app.route('/customer', methods=['GET', 'POST'])
@@ -165,6 +136,7 @@ def customer():
     if session.get('id') == None:
         return redirect(url_for('login'))
     else:
+        title = 'Customer'
         cur = mysql.connection.cursor()
         if request.method == 'POST':
             # Request Data from HTML file from
@@ -177,7 +149,9 @@ def customer():
             temp = cur.fetchall()
             directory = str(temp[0][0])
             path = os.path.join(app.config['UPLOAD_FOLDER'], directory)
-            if temp[0][7] != 'Verified':
+            if temp[0][7] == 'Verified' or temp[0][7] == 'Not-Verified':
+                pass
+            else:
                 if os.path.isdir(path) != True:
                     os.mkdir(path)
                 for x in os.listdir(path):
@@ -190,19 +164,62 @@ def customer():
                     print('################# No File Selected #################')
                 if file and allowed_file(file.filename):
                     filename = secure_filename(file.filename)
-                    file.save(os.path.join(app.config['UPLOAD_FOLDER']+str(temp[0][0])+'/', filename))
-                    #print('upload_image filename: ' + filename)
-                    print('################# Image successfully uploaded #################')
+                    src = os.path.join(app.config['UPLOAD_FOLDER']+str(temp[0][0])+'/', filename)
+                    file.save(src)
+                    dest = os.path.join(app.config['UPLOAD_FOLDER']+str(temp[0][0])+'/', str(temp[0][0])+'.jpg')
+                    os.rename(src, dest)
                     cur.execute("UPDATE customers SET document_verified=%s where id=%s", ('Not-Verified', id))
             cur.execute("UPDATE customers SET address=%s,phone=%s, dob=%s where id=%s", (address, phone, dob, id))
             mysql.connection.commit()
             cur.close()
-            i_messagebox('Changes Saved!')
         id = session['id']
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM `customers` WHERE id='%s'" % id)
         data = cur.fetchall()
-        return render_template('customer.html', data=data)
+        return render_template('customer.html', data=data, title=title)
+
+@app.route('/admin')
+def admin():
+    if session.get('id') == None:
+        return redirect(url_for('login'))
+    else: 
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM `customers` WHERE id='%s'" % id)
+        data = cur.fetchall()
+        return render_template('admin.html', data=data)
+
+@app.route('/userdata', methods=['GET', 'POST'])
+def userdata():
+    if session.get('id') == None:
+        return redirect(url_for('login'))
+    else: 
+        title = 'User Data'
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM `customers`")
+        data = cur.fetchall()
+        return render_template('userdata.html', data=data, title=title)
+
+@app.route("/documentcheck/<emailid>", methods=['GET', 'POST'])
+def documentcheck(emailid):
+    title = 'User Data'
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM `customers` WHERE emailid='%s'" % emailid)
+    data = cur.fetchall()
+    print(data)
+    return render_template('documentcheck.html', emailid=emailid, title=title, data=data)
+
+@app.route("/documentstatus/<emailid>/<status>", methods=['GET', 'POST'])
+def documentstatus(emailid, status):
+    title = 'User Data'
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE customers SET document_verified=%s where emailid=%s", (status, emailid))
+    mysql.connection.commit()
+    cur.close()
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM `customers` WHERE emailid='%s'" % emailid)
+    data = cur.fetchall()
+    print(data)
+    return render_template('documentcheck.html', title=title, emailid=emailid, data=data)
 
 @app.route("/logout")
 def logout():
