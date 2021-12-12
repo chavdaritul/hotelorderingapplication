@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="message.css">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            ul{
+                float: right;
+                list-style-type: none;
+                margin-top: 30px;
+                margin-right: 30px;
+            }
+            ul li{
+                display: inline-block;
+            }
+            ul li a{
+                text-decoration: none;
+                color: black;
+                padding: 5px 20px;
+                border-radius: 8px;
+                font-family: Bebas Neue;
+                font-size: 30px;
+                transition: 0.6s ease;
+            }
+            .active{
+                background-color: #ffd000;
+                color: black;
+            }
+            ul li a:hover{
+                background-color: #ffd000;
+                color: black;
+            }
+            .cust_header{
+                float: left;
+                width: auto;
+                margin-top: 20px;
+                margin-left: 20px;
+                font-family: Bebas Neue;
+                font-size: 50px;
+            }
+            .center_image{
+                width: 15%;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class='cust_header'>
+                <a href="/customer"><img class="center_image" src="./images/logo.png"></a>
+            </div>
+            <div class="main">
+                <ul>
+                    {% if title == 'Customer' %}
+                        <li><a href="/customer" class="active">Profile</a></li>
+                        <li><a href="#">Order History</a></li>
+                        <li><a href="#">Payment</a></li>
+                        <li><a href="#">Change Password</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="/customer">Profile</a></li>
+                        <li><a href="#">Order History</a></li>
+                        <li><a href="#">Payment</a></li>
+                        <li><a href="#">Change Password</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </header>
+        {% block content %}{% endblock %}
+    </body>
+</html>

@@ -1,233 +1,187 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            *{
-                margin: 0;
-                padding: 0;
-            }
-            ul{
-                float: right;
-                list-style-type: none;
-                margin-top: 30px;
-                margin-right: 30px;
-            }
-            ul li{
-                display: inline-block;
-            }
-            ul li a{
-                text-decoration: none;
-                color: black;
-                padding: 5px 20px;
-                border-radius: 8px;
-                font-family: Bebas Neue;
-                font-size: 30px;
-                transition: 0.6s ease;
-            }
-            .active{
-                background-color: #ffd000;
-                color: black;
-            }
-            ul li a:hover{
-                background-color: #ffd000;
-                color: black;
-            }
-            .cust_header{
-                float: left;
-                width: auto;
-                margin-top: 20px;
-                margin-left: 20px;
-                font-family: Bebas Neue;
-                font-size: 50px;
-            }
-            .center_image{
-                width: 15%;
-                height: auto;
-            }
-            .profile{
-                position: absolute;
-                margin-left: 30%;
-                margin-top: 8%;
-                width: 40%;
-                text-align: center;
-            }
-            .img{
-                width: 20%;
-                height: auto;
-            }
-            input[type=text],[type=password],[type=email]{
-                width: 70%;
-                height: 50px;
-                margin-top: 5%;
-                border-radius: 50px;
-                font-family: Bebas Neue;
-                font-size: 1.4rem;
-                padding-left: 30px;
-                padding-right: 30px;
-                border: 0;
-                background-color: rgb(242, 242, 242);
-                outline: none;
-                color: grey;
-            }
-            input[type=submit]{
-                margin-top: 5%;
-                background-color: #ffd000;
-                width: 30%;
-                height: 50px;
-                font-family: Bebas Neue;
-                font-size: 1.4rem;
-                outline: none;
-                border: 0;
-                border-radius: 50px;
-                color: black;
-                transition: 0.6s;
-            }
-            input[type=submit]:hover{
-                margin-top: 5%;
-                background-color: black;
-                width: 30%;
-                height: 50px;
-                font-family: Bebas Neue;
-                font-size: 1.4rem;
-                outline: none;
-                border-radius: 50px;
-                color: #ffd000;
-            }
-            .form_data{
-                font-family: Bebas Neue;
-                font-size: 1.4rem;
-                color: #ffd000;
-            }
-            .upload-box{
-                font-family: Bebas Neue;
-                font-size: 1.4rem;
-                margin-top: 5%;
-                border-radius: 50px;
-                width: 50%;
-                height: 50px;
-                background-color: rgb(242, 242, 242);
-                outline: none;
-                text-align: center;
-                border: 0;
-            }
-            ::-webkit-file-upload-button{
-                font-family: Bebas Neue;
-                color: rgb(242, 242, 242);
-                background-color: #ffd000;
-                padding-left: 20px;
-                border-radius: 50px;
-                outline: none;
-                border: 0;
-                height: 50px;
-                padding-right: 20px;
-            }
-            ::-webkit-file-upload-button:hover{
-                font-family: Bebas Neue;
-                color: #ffd000;
-                background-color: rgb(242, 242, 242);
-                transition: 0.5s;
-                padding-left: 20px;
-                border-radius: 50px;
-                outline: none;
-                border-style: xsolid #ffd000;
-                height: 50px;
-                padding-right: 20px;
-            }
-            input[type=date]{
-                color: gray;
-                background-color: rgb(242, 242, 242);
-                font-family: Bebas Neue;
-                font-size: 1.4rem;
-                border: none;
-                width: 73%;
-                margin-top: 5%;
-                border-radius: 50px;
-                padding-left: 20px;
-                padding-right: 20px;
-                height: 50px;
-            }
-
-            .message{
-                font-size: 1rem;
-                padding-left: 5%;
-                transform: translate(2.5%, 0%);
-            }
-            .table_check{
-                height: 60px;
-                margin-left: 25%;
-                background-color: rgb(40, 195, 0, 0.2);
-                border-radius: 15px;
-                width: 50%;
-                margin-top: 5%;
-                font-family: Raleway;
-                border: 1px solid #28C300;
-            }
-            .check, .info{
-                transform: translate(-20%, -50%);
-                position: absolute;
-                width: 100px;
-            }
-            .table_info{
-                height: 60px;
-                margin-left: 25%;
-                background-color: rgb(0, 143, 225, 0.2);
-                border-radius: 15px;
-                width: 50%;
-                margin-top: 5%;
-                font-family: Raleway;
-                border: 1px solid #008FFF;
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            <div class='cust_header'>
-                <a href="/customer"><img class="center_image" src="./images/logo.png"></a>
-            </div>
-            <div class="main">
-                <ul>
-                    <li><a href="#" class="active">Profile</a></li>
-                    <li><a href="#">Order History</a></li>
-                    <li><a href="#">Payment</a></li>
-                    <li><a href="#">Change Password</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class="profile">
-            <form method="post" action="" enctype="multipart/form-data">
-                <p class='form_data'><img src="./images/profile_bg.png" class="img"></p>
-                <p class='form_data'>NAME : <input type="text" value="{{data[0][1]}}" name="NAME" disabled></p>
-                <p class='form_data'>EMAIL-ID : <input type="text" value="{{data[0][2]}}" name="emailid" disabled></p>
-                {% if data[0][3] == '' and data[0][7] == '' %}
-                    <p class='form_data'>ADDRESS : <input type="text" value="" name="address"></p>
-                    <p class='form_data'>PHONE : <input type="text" value="" name="phone"></p>
-                {% else %}
-                    <p class='form_data'>ADDRESS : <input type="text" value="{{data[0][3]}}" name="address"></p>
-                    <p class='form_data'>PHONE : <input type="text" value="{{data[0][4]}}" name="phone"></p>
-                {% endif %}
-                <p class='form_data'>DOB : <input type="date" value="{{data[0][6]}}" name="dob"></p>
-                {% if data[0][7] == 'Not-Verified' %}
-                    <!-- <p class="message" style="color: red;">Document already submitted for KYC &nbsp;<img src="./images/info.png" style="width:5%;"></p> -->
-                    <table class="table_info">
-                        <tr>
-                            <th><img src="./images/info.png" class='info'></th>
-                            <th><p class="message" style="color: #008FFF;">Document already submitted for KYC</p></th>
-                        </tr>
-                      </table>
-                {% elif data[0][7] == 'Verified' %}
-                    <!-- <div class='information'><img src="./images/check.png">Document Verified &nbsp;</p></div> -->
-                    <table class="table_check">
-                        <tr>
-                            <th><img src="./images/check.png" class='check'></th>
-                            <th><p class="message" style="color: #28C300;">Document Verified</p></th>
-                        </tr>
-                      </table>
-                {% else %}
-                    <p class='form_data'>Upload Document for KYC : <input type="file" class="upload-box" name="document_kyc"></p>
-                {% endif %}
-                <p class='form_data'><input type="Submit" value="Save Changes"></p>
-            </form>
-        </div>
-    </body>
-</html>
+<head>
+    <style>
+        .img{
+            width: 20%;
+            height: auto;
+        }
+        input[type=text], input[type=number], input[type=date]{
+            width: 100%;
+            height: 50px;
+            border-radius: 50px;
+            border: none;
+            background-color: rgb(242, 242, 242);
+            color: grey;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-family: Bebas Neue;
+            font-size: 1.4rem;
+            outline: none;
+        }
+        input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=submit]{
+            width: 30%;
+            height: 50px;
+            border-radius: 50px;
+            border: none;
+            background-color: #ffd000;
+            color: black;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-family: Bebas Neue;
+            font-size: 1.4rem;
+            outline: none;
+            transition: 0.6s;
+        }
+        input[type=submit]:hover{
+            background-color: black;
+            color: #ffd000;
+        }
+        input[type=file]{
+            font-family: Bebas Neue;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            width: 50%;
+            height: 50px;
+            background-color: rgb(242, 242, 242);
+            outline: none;
+            text-align: center;
+            border: 0;
+        }
+        ::-webkit-file-upload-button{
+            font-family: Bebas Neue;
+            color: grey;
+            background-color: #ffd000;
+            padding-left: 20px;
+            border-radius: 50px;
+            outline: none;
+            border: 0;
+            height: 50px;
+            padding-right: 20px;
+            transition: 0.6s;
+        }
+        ::-webkit-file-upload-button:hover{
+            font-family: Bebas Neue;
+            background-color: rgb(242, 242, 242);
+            padding-left: 20px;
+            border-radius: 50px;
+            outline: none;
+            color: grey;
+            height: 50px;
+            padding-right: 20px;
+        }
+        .form_data{
+            font-size: 1.4rem;
+            font-family: Bebas Neue;
+            color: #ffd000;
+            text-align: center;
+        }
+        .info-table{
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+{% extends "customer_header.html" %}
+{% block content %}
+    </br></br></br></br></br></br></br>
+    <form method="post" action="" enctype="multipart/form-data">
+        <table class="info-table">
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <th colspan="2">
+                    <p class='form_data'><img src="./images/profile_bg.png" class="img"></p>
+                </th>
+            </tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <td>
+                    <p class='form_data'>Name </p>
+                </td>
+                <td>
+                    <input type="text" value="{{data[0][1]}}" name="NAME" disabled>
+                </td>
+            </tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <td>
+                    <p class='form_data'>EMAIL-ID</p>
+                </td>
+                <td>
+                    <input type="text" value="{{data[0][2]}}" name="emailid" disabled>
+                </td>
+            </tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <td>
+                    <p class='form_data'>ADDRESS</p>
+                </td>
+                <td>
+                    {% if data[0][3] == '' %}
+                        <input type="text" value="" name="address">
+                    {% else %}
+                        <input type="text" value="{{data[0][3]}}" name="address">
+                    {% endif %}
+                </td>
+            </tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <td>
+                    <p class='form_data'>PHONE</p>
+                </td>
+                <td>
+                    {% if data[0][3] == '' %}
+                        <input type="number" value="" name="phone">
+                    {% else %}
+                        <input type="number" value="{{data[0][4]}}" name="phone">
+                    {% endif %}
+                </td>
+            </tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <td>
+                    <p class='form_data'>DOB</p>
+                </td>
+                <td>
+                    <input type="date" value="{{data[0][6]}}" name="dob">
+                </td>
+            </tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <td colspan="2">
+                    {% if data[0][7] == 'Not-Verified' %}
+                        <!-- <p class="message" style="color: red;">Document already submitted for KYC &nbsp;<img src="./images/info.png" style="width:5%;"></p> -->
+                        <table class="table_info">
+                            <tr>
+                                <th><img src="./images/info.png" class='info'></th>
+                                <th><p class="message" style="color: #008FFF;">Document Submitted</p></th>
+                            </tr>
+                        </table>
+                    {% elif data[0][7] == 'Verified' %}
+                        <!-- <div class='information'><img src="./images/check.png">Document Verified &nbsp;</p></div> -->
+                        <table class="table_check">
+                            <tr>
+                                <th><img src="./images/check.png" class='check'></th>
+                                <th><p class="message" style="color: #28C300;">Document Verified</p></th>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <p class='form_data'>Upload Document for KYC : <input type="file" class="upload-box" name="document_kyc"></p>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr><th colspan="2">&nbsp;</th></tr>
+            <tr class='tr-tb-dta'>
+                <td colspan="2">
+                    <p class='form_data'><input type="Submit" value="Save Changes"></p>
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock content%}
