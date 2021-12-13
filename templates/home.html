@@ -1,38 +1,10 @@
     <head>
-        <style>
-            .homepg_div{
-                position: absolute;
-            }
-            .homepg_bg{
-                margin-top: 7%;
-                margin-left: 39.35%;
-                width: 95%;
-                height: auto;
-            }
-            .homepg_div_cont{
-                position: absolute;
-                margin-top: 11%;
-                margin-left: 3%;
-                font-family: Bebas Neue;
-                font-size: 25px;
-                width: 23%;
-                height: 60%;
-                text-align: justify;
-            }
-            .down_div{
-                position: absolute;
-                margin-top: 43%;
-                margin-left: 12%;
-            }
-            .down{
-                width: auto;
-            }
-        </style>
+        <link rel="stylesheet" href="../static/css/home.css">
     </head>
 {% extends "main_header.html" %}
 {% block content %}
         <div class="homepg_div">
-            <img class="homepg_bg" src="./images/homepg_img.png">
+            <img class="homepg_bg" src="../static/images/homepg_img.png">
         </div>
         <div class="homepg_div_cont">
             <p>Hotel Ordering Application is developed to minimize the effort in the traditional way to
@@ -47,6 +19,6 @@
                 more will be stored.</p>
         </div>
         <div class="down_div">
-            <a href="/menu"><img class="down" src="./images/down.png"></a>
+            <a href="/menu"><img class="down" src="../static/images/down.png"></a>
         </div>
 {% endblock content%}

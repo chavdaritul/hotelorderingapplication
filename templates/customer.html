@@ -1,89 +1,5 @@
 <head>
-    <style>
-        .img{
-            width: 20%;
-            height: auto;
-        }
-        input[type=text], input[type=number], input[type=date]{
-            width: 100%;
-            height: 50px;
-            border-radius: 50px;
-            border: none;
-            background-color: rgb(242, 242, 242);
-            color: grey;
-            padding-left: 30px;
-            padding-right: 30px;
-            font-family: Bebas Neue;
-            font-size: 1.4rem;
-            outline: none;
-        }
-        input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type=submit]{
-            width: 30%;
-            height: 50px;
-            border-radius: 50px;
-            border: none;
-            background-color: #ffd000;
-            color: black;
-            padding-left: 30px;
-            padding-right: 30px;
-            font-family: Bebas Neue;
-            font-size: 1.4rem;
-            outline: none;
-            transition: 0.6s;
-        }
-        input[type=submit]:hover{
-            background-color: black;
-            color: #ffd000;
-        }
-        input[type=file]{
-            font-family: Bebas Neue;
-            font-size: 1.4rem;
-            border-radius: 50px;
-            width: 50%;
-            height: 50px;
-            background-color: rgb(242, 242, 242);
-            outline: none;
-            text-align: center;
-            border: 0;
-        }
-        ::-webkit-file-upload-button{
-            font-family: Bebas Neue;
-            color: grey;
-            background-color: #ffd000;
-            padding-left: 20px;
-            border-radius: 50px;
-            outline: none;
-            border: 0;
-            height: 50px;
-            padding-right: 20px;
-            transition: 0.6s;
-        }
-        ::-webkit-file-upload-button:hover{
-            font-family: Bebas Neue;
-            background-color: rgb(242, 242, 242);
-            padding-left: 20px;
-            border-radius: 50px;
-            outline: none;
-            color: grey;
-            height: 50px;
-            padding-right: 20px;
-        }
-        .form_data{
-            font-size: 1.4rem;
-            font-family: Bebas Neue;
-            color: #ffd000;
-            text-align: center;
-        }
-        .info-table{
-            width: 40%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../static/css/customer.css">
 </head>
 {% extends "customer_header.html" %}
 {% block content %}
@@ -95,7 +11,7 @@
             <tr><th colspan="2">&nbsp;</th></tr>
             <tr class='tr-tb-dta'>
                 <th colspan="2">
-                    <p class='form_data'><img src="./images/profile_bg.png" class="img"></p>
+                    <p class='form_data'><img src="../static/images/profile_bg.png" class="img"></p>
                 </th>
             </tr>
             <tr><th colspan="2">&nbsp;</th></tr>
@@ -156,18 +72,18 @@
             <tr class='tr-tb-dta'>
                 <td colspan="2">
                     {% if data[0][7] == 'Not-Verified' %}
-                        <!-- <p class="message" style="color: red;">Document already submitted for KYC &nbsp;<img src="./images/info.png" style="width:5%;"></p> -->
+                        <!-- <p class="message" style="color: red;">Document already submitted for KYC &nbsp;<img src="../static/images/info.png" style="width:5%;"></p> -->
                         <table class="table_info">
                             <tr>
-                                <th><img src="./images/info.png" class='info'></th>
+                                <th><img src="../static/" class='info'></th>
                                 <th><p class="message" style="color: #008FFF;">Document Submitted</p></th>
                             </tr>
                         </table>
                     {% elif data[0][7] == 'Verified' %}
-                        <!-- <div class='information'><img src="./images/check.png">Document Verified &nbsp;</p></div> -->
+                        <!-- <div class='information'><img src="../static/images/check.png">Document Verified &nbsp;</p></div> -->
                         <table class="table_check">
                             <tr>
-                                <th><img src="./images/check.png" class='check'></th>
+                                <th><img src="../static/images/check.png" class='check'></th>
                                 <th><p class="message" style="color: #28C300;">Document Verified</p></th>
                             </tr>
                         </table>

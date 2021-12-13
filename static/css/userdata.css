@@ -1,0 +1,40 @@
+.display-data-table, h1{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Bebas Neue;
+}
+.pg-title{
+    text-align: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(225, 208, 0, 0.2);
+    border-radius: 30px;
+    border: 2px solid #ffd000;
+}
+.th-data{
+    font-size: 2rem;
+    text-align: left;
+    width: 75%;
+}
+.td-data{
+    font-size: 1.5rem;
+}
+.block{
+    margin-right: auto;
+    margin-left: auto;
+    width: 60%;
+    border: 2px solid #ffd000;
+    border-radius: 30px;
+    height: auto;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+img{
+    margin: auto;
+}
+a{
+    text-decoration: none;
+    color: #ffd000;
+}

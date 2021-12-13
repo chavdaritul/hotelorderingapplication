@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/cart.css">
+</head>
+<body>
+<div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+
+<div id="product-grid">
+    <div class="txt-heading">Products</div>
+
+    {% for item in items %}
+
+    <div class="product-item">
+        <form method="post" action="/add">
+            <div class="product-image"><img src="../static/images/{{ product.image }}"></div>
+            <div class="product-tile-footer">
+                <div class="product-title">{{ product.name }}</div>
+                <div class="product-price">&#8377; {{ product.price }}</div>
+                <div class="cart-action">
+                    <input type="hidden" name="code" value="{{ product.code }}"/>
+                    <input type="text" class="product-quantity" name="quantity" value="1" size="2" />
+                    <input type="submit" value="Add to Cart" class="btnAddAction" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% endfor %}
+</div>
+</body>
+</html>

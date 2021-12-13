@@ -31,8 +31,8 @@ CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(225) NOT NULL,
   `emailid` varchar(225) NOT NULL,
-  `address` varchar(225) NOT NULL,
-  `phone` varchar(225) NOT NULL,
+  `address` varchar(225) DEFAULT NULL,
+  `phone` varchar(225) DEFAULT NULL,
   `password` varchar(225) NOT NULL,
   `dob` date DEFAULT NULL,
   `document_verified` varchar(225) NOT NULL DEFAULT 'Not-Uploaded'
@@ -123,3 +123,11 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE `hotel_ordering_application`.`items`
+( `Id` INT NOT NULL ,
+`Name` VARCHAR(20) NOT NULL ,
+`Description` VARCHAR(250) NOT NULL ,
+`Price` INT NOT NULL ,
+`ImagePath` VARCHAR(100) NOT NULL ,
+PRIMARY KEY (`Id`)) ENGINE = InnoDB;

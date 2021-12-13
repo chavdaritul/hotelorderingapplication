@@ -1,209 +1,113 @@
 <head>
-    <style>
-        #row{
-            padding-top: 0%;
-        }
-        .column{
-            width: 70%;
-            height: 25%;
-            display: inline-block;
-            margin-top: 1%;
-            margin-left: 1%;
-            border-width: 5px;
-            border: 1px solid #ffd000;
-            border-radius: 10px;
-        }
-        .dish{
-            font-family: Bebas Neue;
-            font-size: 30px;
-            padding-top: 2%;
-            padding-left: 5%;
-            color: black;
-        }
-        .discription{
-            font-family: Raleway;
-            font-size: 20px;
-            padding-left: 5%;
-            width: 50%;
-            color: black;
-            width: 55%;
-        }
-        .price{
-            font-family: Raleway;
-            font-size: 20px;
-            padding-left: 5%;
-            margin-top: auto;
-            color: black;
-        }
-        .left{
-            margin-left: 14.5%;
-        }
-        .img{
-            width: 30%;
-            height: 100%;
-            float: right;
-            transform: translate(0%, -27.5%);
-            border-radius: 0px 10px 10px 0px;
-        }
-        .info_click{
-            text-decoration: none;
-            color: white;
-            background-color: black;
-            margin-left: 5%;
-            border-radius: 5px;
-            font-family: Bebas Neue;
-            font-size: 25px;
-            transition: 0.4s ease;
-            padding: 5px 15px;
-        }
-        .info_click:hover{
-            color: black;
-            background-color: white;
-            border: 1px solid black;
-        }
-        .mains, .starter{
-            font-family: Bebas Neue;
-            font-size: 36px;
-            margin-left: 15%;
-            margin-top: 1%;
-            color: black;
-        }
-        .t_description{
-            font-family: Raleway;
-            font-size: 20px;
-            margin-left: 15%;
-            color: black;
-        }
-        #subtract, #add{
-            width: 2%;
-            display: inline-block;
-            text-align: center;
-            border: none;
-            font-family: Bebas Neue;
-            font-size: 1.4rem;
-            background-color: black;
-            color: white;
-            border-radius: 25%;
-        }
-        #subtract{
-            margin-left: 5%;
-        }
-        input[type=number]{
-            font-family: Bebas Neue;
-            font-size: 1.4rem;
-            text-align: center;
-            border: none;
-            width: 5%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../static/css/menu.css">
 </head>
 {% extends "main_header.html" %}
 {% block content %}
-    </br></br></br></br></br>
-    <p class="starter" id="starter">Starter</p>
-    <p class="t_description">An hors d'oeuvre, appetizer or starter is a small dish served before a meal in European cuisine.</p>
-    <div id="row">
-        {% for product in products %}
-        {% if product[3] == 'starter' %}
-        <div class="column left">
-            <p class="dish">{{ product[1] }}</p>
-            <img src="./images/{{ product[2] }}" class="img">
-            <p class="discription">{{ product[5] }}</p>
-            </br>
-            <p class="price">Price: {{ product[4] }}Rs</p>
-            </br>
-            <p>
-                <div>
-                    <button id="subtract">-</button>
-                    <input type="number" value="0">
-                    <button id="add">+</button>
-                </div>
-            </p>
+</br></br></br></br></br>
+<p class="starter" id="starter">Starter</p>
+<p class="t_description">An hors d'oeuvre, appetizer or starter is a small dish served before a meal in European cuisine.</p>
+<div id="row">
+    {% for product in products %}
+    {% if product[3] == 'starter' %}
+    <div class="column left">
+        <p class="dish">{{ product[1] }}</p>
+        <img src="../static/images/{{ product[2] }}" class="img">
+        <p class="discription">{{ product[5] }}</p>
+        </br>
+        <p class="price">Price: {{ product[4] }}Rs</p>
+        </br>
+        <p>
+        <div>
+            <button id="subtract">-</button>
+            <input type="number" value="0">
+            <button id="add">+</button>
         </div>
-        {% endif %}
-        {% endfor %}
+        </p>
     </div>
-    <p class="mains" id="mains">Mains</p>
-    <p class="t_description">A main course is the featured or primary dish in a meal consisting of several courses.</p>
-    <div id="row">
-        {% for product in products %}
-        {% if product[3] == 'main' %}
-        <div class="column left">
-            <p class="dish">{{ product[1] }}</p>
-            <img src="./images/{{ product[2] }}" class="img">
-            <p class="discription">{{ product[5] }}</p>
-            </br>
-            <p class="price">Price: {{ product[4] }}Rs</p>
-            </br>
-            <p>
-                <div>
-                    <button id="subtract">-</button>
-                    <input type="number" value="0">
-                    <button id="add">+</button>
-                </div>
-            </p>
+    {% endif %}
+    {% endfor %}
+</div>
+<p class="mains" id="mains">Mains</p>
+<p class="t_description">A main course is the featured or primary dish in a meal consisting of several courses.</p>
+<div id="row">
+    {% for product in products %}
+    {% if product[3] == 'main' %}
+    <div class="column left">
+        <p class="dish">{{ product[1] }}</p>
+        <img src="../static/images/{{ product[2] }}" class="img">
+        <p class="discription">{{ product[5] }}</p>
+        </br>
+        <p class="price">Price: {{ product[4] }}Rs</p>
+        </br>
+        <p>
+        <div>
+            <button id="subtract">-</button>
+            <input type="number" value="0">
+            <button id="add">+</button>
         </div>
-        {% endif %}
-        {% endfor %}
+        </p>
     </div>
-    <p class="mains" id="dessert">Dessert</p>
-    <p class="t_description">Dessert is a course that concludes a meal.</p>
-    <div id="row">
-        {% for product in products %}
-        {% if product[3] == 'dessert' %}
-        <div class="column left">
-            <p class="dish">{{ product[1] }}</p>
-            <img src="./images/{{ product[2] }}" class="img">
-            <p class="discription">{{ product[5] }}</p>
-            </br>
-            <p class="price">Price: {{ product[4] }}Rs</p>
-            </br>
-            <p>
-                <div>
-                    <button id="subtract">-</button>
-                    <input type="number" value="0">
-                    <button id="add">+</button>
-                </div>
-            </p>
+    {% endif %}
+    {% endfor %}
+</div>
+<p class="mains" id="dessert">Dessert</p>
+<p class="t_description">Dessert is a course that concludes a meal.</p>
+<div id="row">
+    {% for product in products %}
+    {% if product[3] == 'dessert' %}
+    <div class="column left">
+        <p class="dish">{{ product[1] }}</p>
+        <img src="../static/images/{{ product[2] }}" class="img">
+        <p class="discription">{{ product[5] }}</p>
+        </br>
+        <p class="price">Price: {{ product[4] }}Rs</p>
+        </br>
+        <p>
+        <div>
+            <button id="subtract">-</button>
+            <input type="number" value="0">
+            <button id="add">+</button>
         </div>
-        {% endif %}
-        {% endfor %}
+        </p>
     </div>
-    <p class="mains" id="beverages">Beverages</p>
-    <p class="t_description">A drink is a liquid intended for human consumption. In addition to their basic function of satisfying thirst, drinks play important roles in human culture.</p>
-    <div id="row">
-        {% for product in products %}
-        {% if product[3] == 'beverages' %}
-        <div class="column left">
-            <p class="dish">{{ product[1] }}</p>
-            <img src="./images/{{ product[2] }}" class="img">
-            <p class="discription">{{ product[5] }}</p>
-            </br>
-            <p class="price">Price: {{ product[4] }}Rs</p>
-            </br>
-            <p>
-                <div>
-                    <button id="subtract">-</button>
-                    <input type="number" value="0">
-                    <button id="add">+</button>
-                </div>
-            </p>
+    {% endif %}
+    {% endfor %}
+</div>
+<p class="mains" id="beverages">Beverages</p>
+<p class="t_description">A drink is a liquid intended for human consumption. In addition to their basic function of satisfying thirst, drinks play important roles in human culture.</p>
+<div id="row">
+    {% for product in products %}
+    {% if product[3] == 'beverages' %}
+    <div class="column left">
+        <p class="dish">{{ product[1] }}</p>
+        <img src="../static/images/{{ product[2] }}" class="img">
+        <p class="discription">{{ product[5] }}</p>
+        </br>
+        <p class="price">Price: {{ product[4] }}Rs</p>
+        </br>
+        <p>
+        <div>
+            <button id="subtract">-</button>
+            <input type="number" value="0">
+            <button id="add">+</button>
         </div>
-        {% endif %}
-        {% endfor %}
+        </p>
     </div>
-    </br>
-    </br>
-    <script>
-        let btnAdd = document.querySelector('#add');
-        let btnSubtract = document.querySelector('#subtract');
-        let input = document.querySelector('input');
+    {% endif %}
+    {% endfor %}
+</div>
+</br>
+</br>
+<script>
+    let btnAdd = document.querySelector('#add');
+    let btnSubtract = document.querySelector('#subtract');
+    let input = document.querySelector('input');
 
-        btnAdd.addEventListener('click', () => {
-            input.value = parseInt(input.value) + 1;
-        });
-        btnSubtract.addEventListener('click', () => {
-            input.value = parseInt(input.value) - 1;
-        });
-    </script>
+    btnAdd.addEventListener('click', () => {
+        input.value = parseInt(input.value) + 1;
+    });
+    btnSubtract.addEventListener('click', () => {
+        input.value = parseInt(input.value) - 1;
+    });
+</script>
 {% endblock content%}

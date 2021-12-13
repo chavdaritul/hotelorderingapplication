@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import os
 import datetime
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = '92b1e1bfefb207d960945555065173bf'
 bcrypt = Bcrypt()
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
@@ -30,6 +30,12 @@ mysql = MySQL(app)
 @app.route('/home')
 def home():
     return render_template('home.html')
+
+
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
+
 
 @app.route('/menu')
 def menu():
@@ -96,8 +102,12 @@ def register():
             cur.execute('INSERT into customers(name, emailid, password) values(%s, %s, %s)',
                         (name, emailid, password))
             mysql.connection.commit()
+            cur.execute("SELECT id FROM `customers` WHERE emailid='%s'" % emailid)
+            data = cur.fetchone()
+            if data:
+                session['id'] = data[0]
             cur.close()
-            return redirect(url_for('login'))
+            return redirect(url_for('menu'))
         else:
             return render_template('register.html')
 

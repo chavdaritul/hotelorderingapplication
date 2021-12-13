@@ -1,0 +1,27 @@
+.homepg_div{
+    position: absolute;
+}
+.homepg_bg{
+    margin-top: 7%;
+    margin-left: 39.35%;
+    width: 95%;
+    height: auto;
+}
+.homepg_div_cont{
+    position: absolute;
+    margin-top: 11%;
+    margin-left: 3%;
+    font-family: Bebas Neue;
+    font-size: 25px;
+    width: 23%;
+    height: 60%;
+    text-align: justify;
+}
+.down_div{
+    position: absolute;
+    margin-top: 43%;
+    margin-left: 12%;
+}
+.down{
+    width: auto;
+}
