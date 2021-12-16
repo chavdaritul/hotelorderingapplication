@@ -42,7 +42,7 @@ def menu():
     try:
         title = 'Menu'
         cur = mysql.connection.cursor()
-        cur.execute('Select * from menu')
+        cur.execute('Select `pid`, `name`, `image`, `category`, `price`, `description` from menu ORDER BY category')
         rows = cur.fetchall()
         return render_template('menu.html', products = rows, title=title)
     except Exception as e:
