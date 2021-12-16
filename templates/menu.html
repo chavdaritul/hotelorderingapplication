@@ -1,9 +1,13 @@
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/css/menu.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/cart.css">
+    <link rel="stylesheet" type="text/css" href="/css/cart.css">
+    <link rel="stylesheet" type="text/css" href="/css/menu.css">
 </head>
-{% extends "main_header.html" %}
+{% if session.get('id') == None %}
+    {% extends "main_header.html" %}
+{% else %}
+    {% extends "customer_header.html" %}
+{% endif %}
 {% block content %}
 </br></br></br></br></br>
 
@@ -15,13 +19,13 @@
     {% endif %}
     <div class="column left">
         <p class="dish" id="dish_{{products[i][0]}}">{{ products[i][1] }}</p>
-        <img src="../static/images/{{ products[i][2] }}" class="img" id="image_{{products[i][0]}}">
+        <img src="/images/{{ products[i][2] }}" class="img" id="image_{{products[i][0]}}">
         <p class="discription">{{ products[i][5] }}</p>
         </br>
         <p class="price" id="price_{{products[i][0]}}">Price: {{ products[i][4] }}Rs</p>
         </br>
         <p>
-        <div>
+        <div class='pm-div'>
             <button class="sub_add cd-add-to-cart js-cd-add-to-cart" id="subtract_{{products[i][0]}}">-</button>
             <input type="number" value="0" id="qty_{{products[i][0]}}">
             <button class="sub_add cd-add-to-cart js-cd-add-to-cart" id="add_{{products[i][0]}}" onclick="js_fn('{{products[i][1]}}', '{{products[i][4]}}', '{{products[i][2]}}')">+</button>
@@ -122,6 +126,6 @@
         document.getElementById('totalAmt').textContent = parseInt(document.getElementById('totalAmt').textContent)+parseInt(price);
     }
 </script>
-<script src="{{ url_for('static', filename='../static/scripts/util.js') }}"></script> <!-- util functions included in the CodyHouse framework -->
-<script src="{{ url_for('static', filename='../static/scripts/main.js') }}"></script>
+<script src="{{ url_for('static', filename='/scripts/util.js') }}"></script> <!-- util functions included in the CodyHouse framework -->
+<script src="{{ url_for('static', filename='/scripts/main.js') }}"></script>
 {% endblock content%}

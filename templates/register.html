@@ -1,18 +1,83 @@
  <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="../static/css/message.css">
-        <link rel="stylesheet" type="text/css" href="../static/css/register.css">
+        <link rel="stylesheet" href="message.css">
+        <style>
+            body{
+                margin: 0;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.385), rgba(0, 0, 0, 0.385)), url('images/register_bg.jpg');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100%;
+                width: 100%;
+                height: 100%;
+                
+            }
+            #left, #center, #right{
+                position: absolute;
+            }
+            #left{
+                text-align: left;
+                z-index: 1;
+            }
+            #right{
+                text-align: right;
+                z-index: 2;
+            }
+            #center{
+                transform: translate(0%, -5%);
+                margin: 0% 0% 0% 25%;
+                text-align: center;
+                width: 50%;
+                top: 5%;
+                background-color: white;
+                height: 100%;
+                font-family: Bebas Neue;
+            }
+            .center_image{
+                width: 18%;
+                height: auto;
+            }
+            input[type=text],[type=password],[type=email]{
+                width: 49%;
+                height: 5.2%;
+                margin-top: 30px;
+                border-radius: 50px;
+                font-family: Bebas Neue;
+                font-size: 1.4rem;
+                padding-left: 55px;
+                border: 0;
+                background-color: rgb(242, 242, 242);
+                outline: none;
+                color: rgb(150, 150, 150);
+            }
+            ::placeholder{
+                color: rgb(150, 150, 150)
+            }
+            .user_input_ico{
+                position: absolute;
+                height: 5.5%;
+                padding-top: 38px;
+                padding-left: 15px;
+            }
+            ul {
+                list-style-type: none;
+                transform: translate(-2%, 0%);
+            }
+            .footer{
+                transform: translate(0%, -100%)
+            }
+        </style>
     </head>
     <body>
     
         <div id="center">
             </br></br></br>
-            <a href="/home"><img class="center_image" src="../static/images/register.png"></a>
+            <a href="/home"><img class="center_image" src="./images/register.png"></a>
             </br>
             {% for message in get_flashed_messages() %}
             <table class="table_error">
                 <tr>
-                    <th><img src="../static/images/error.png" class='error'></th>
+                    <th><img src="./images/error.png" class='error'></th>
                     <th><p class="message" style="color: #FF5440;">{{ message }}</p></th>
                 </tr>
               </table>
@@ -20,21 +85,21 @@
             <form method="POST" action="">
                 <ul>
                     <li>
-                        <img src="../static/images/user.png" class="user_input_ico">
+                        <img src="./images/user.png" class="user_input_ico">
                         <input type="text" placeholder="NAME" name="name">
                     </li>
                     <li>
                         <span id="nameMsg" class="badge displayBadge" style="color: red"></span>
                     </li>
                     <li>
-                        <img src="../static/images/email.png" class="user_input_ico">
+                        <img src="./images/email.png" class="user_input_ico">
                         <input type="email" placeholder="EMAIL-ID" name="emailid" id="emailId">
                     </li>
                     <li>
                         <span id="emailIdMsg" class="badge displayBadge" style="color: red"></span>
                     </li>
                     <li>
-                        <img src="../static/images/lock.png" class="user_input_ico">
+                        <img src="./images/lock.png" class="user_input_ico">
                         <input type="password" placeholder="PASSWORD" name="password" id="password">
                     </li>
                     <li>
@@ -43,7 +108,7 @@
                         </span>
                     </li>
                     <li>
-                        <img src="../static/images/lock.png" class="user_input_ico">
+                        <img src="./images/lock.png" class="user_input_ico">
                         <input type="password" placeholder="CONFIRM PASSWORD" name="confirmpassword" id="confirmPassword">
 
                     </li>
@@ -53,7 +118,7 @@
                     </li>
                     </br>
                     <li>
-                        <input type="image" src="../static/images/next.png" alt='Submit' width="22%" id="submit">
+                        <input type="image" src="./images/next.png" alt='Submit' width="22%" id="submit">
                     </li>
                 </ul>
             </form>
@@ -62,6 +127,6 @@
             </p>
             </br>   
         </div>
-        <script src="../static/scripts/register.js"></script>
+        <script src="./scripts/register.js"></script>
     </body>
 </html>

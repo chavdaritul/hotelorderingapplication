@@ -1,5 +1,46 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/css/userdata.css">
+    <style>
+        .display-data-table, h1{
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: Bebas Neue;
+        }
+        .pg-title{
+            text-align: center;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgb(225, 208, 0, 0.2);
+            border-radius: 30px;
+            border: 2px solid #ffd000;
+        }
+        .th-data{
+            font-size: 2rem;
+            text-align: left;
+            width: 75%;
+        }
+        .td-data{
+            font-size: 1.5rem;
+        }
+        .block{
+            margin-right: auto;
+            margin-left: auto;
+            width: 60%;
+            border: 2px solid #ffd000;
+            border-radius: 30px;
+            height: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+        }
+        img{
+            margin: auto;
+        }
+        a{
+            text-decoration: none;
+            color: #ffd000;
+        }
+    </style>
 </head>
 {% extends "admin_header.html" %}
 {% block content %}
@@ -18,15 +59,15 @@
                         <td class='td-data'>Email ID : {{ user[2] }}</td>
                         {% if user[7] == 'Verified' %}
                             <th rowspan="5" class='th-data' style="text-align: center;">
-                                <img src="../static/images/check.png" class='check'>
+                                <img src="./images/check.png" class='check'>
                             </th>
                         {% elif user[7] == 'Not-Verified' %}
                             <th rowspan="5" class='th-data' style="text-align: center;">
-                                <img src="../static/images/info.png" class='info'>
+                                <img src="./images/info.png" class='info'>
                             </th>
                         {% elif user[7] == 'Not-Uploaded' %}
                             <th rowspan="5" class='th-data' style="text-align: center;">
-                                <img src="../static/images/error.png" class='error'>
+                                <img src="./images/error.png" class='error'>
                             </th>
                         {% endif %}
                     </tr>

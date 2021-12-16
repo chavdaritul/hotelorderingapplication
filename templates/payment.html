@@ -1,0 +1,87 @@
+<head>
+    <style>
+        .img{
+            width: 50%;
+            height: auto;
+        }
+        .form_data{
+            font-size: 3rem;
+            font-family: Bebas Neue;
+            color: #ffd000;
+            text-align: center;
+        }
+        .info-table{
+            width: 20%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            outline: none;
+            color: black;
+            font-size: 2rem;
+            transition: 0.6s;
+        }
+        a:hover{
+            color: #ffd000;
+        }
+        .add-money{
+            margin-left: auto;
+            margin-right: auto;
+            width: 75%;
+            background-color: #ffd000;
+            font-family: Bebas Neue;
+            border-radius: 50px;
+            transition: 0.6s;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+        .add-money:hover{
+            background-color: black;
+            color: #ffd000;
+            font-family: Bebas Neue;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+{% extends "customer_header.html" %}
+{% block content %}
+</br></br></br></br></br></br></br>
+</br></br></br></br></br></br></br>
+<form method="post" action="" enctype="multipart/form-data">
+    <table class="info-table">
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr class='tr-tb-dta'>
+            <th colspan="2">
+                <p class='form_data'><img src="/images/wallet.png" class="img"></p>
+            </th>
+        </tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr class='tr-tb-dta'>
+            <td>
+                <p class='form_data'>Balance : </p>
+            </td>
+            <td>
+                {% if data[0][2] != ''%}
+                    <p class='form_data'>{{ data [0][2] }} Rs</p>
+                {% else %}
+                    <p class='form_data'>0 Rs</p>
+                {% endif %}
+            </td>
+        </tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        {% if data[0][2] != '' and (checkcardbal != None or checkbankbal != None) %}
+            <tr class='tr-tb-dta'>
+                <td colspan="2">
+                    <p class='form_data'><div class="add-money"><a href="/paymentoption">Add Money to Wallet</a></div></p>
+                </td>
+            <tr><th colspan="2">&nbsp;</th></tr>
+        {% endif %}
+    </table>
+</form>
+{% endblock content%}
