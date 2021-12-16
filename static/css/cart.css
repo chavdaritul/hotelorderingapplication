@@ -8,7 +8,9 @@
 * {
     font: inherit
 }
-
+.pm-div{
+    padding-left: 5%;
+}
 html,
 body,
 div,

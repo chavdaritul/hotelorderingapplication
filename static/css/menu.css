@@ -11,6 +11,7 @@
     border: 1px solid #ffd000;
     border-radius: 10px;
 }
+
 .dish{
     font-family: Bebas Neue;
     font-size: 30px;
@@ -29,9 +30,9 @@
     font-family: Raleway;
     font-size: 20px;
     padding-left: 5%;
-    width: 50%;
+    width: 60%;
     color: black;
-    width: 55%;
+    width: 65%;
 }
 .price{
     font-family: Raleway;
