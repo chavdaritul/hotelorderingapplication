@@ -1,0 +1,94 @@
+<!--
+    <p class="starter" id="starter">Starter</p>
+    <p class="t_description">An hors d'oeuvre, appetizer or starter is a small dish served before a meal in European cuisine.</p>
+    <div id="row">
+        {% for product in products %}
+        {% if product[3] == 'starter' %}
+        <div class="column left">
+            <p class="dish">{{ product[1] }}</p>
+            <img src="/images/{{ product[2] }}" class="img">
+            <p class="discription">{{ product[5] }}</p>
+            </br>
+            <p class="price">Price: {{ product[4] }}Rs</p>
+            </br>
+            <p>
+                <div>
+                    <button id="subtract">-</button>
+                    <input type="number" value="0">
+                    <button id="add">+</button>
+                </div>
+            </p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <p class="mains" id="mains">Mains</p>
+    <p class="t_description">A main course is the featured or primary dish in a meal consisting of several courses.</p>
+    <div id="row">
+        {% for product in products %}
+        {% if product[3] == 'main' %}
+        <div class="column left">
+            <p class="dish">{{ product[1] }}</p>
+            <img src="/images/{{ product[2] }}" class="img">
+            <p class="discription">{{ product[5] }}</p>
+            </br>
+            <p class="price">Price: {{ product[4] }}Rs</p>
+            </br>
+            <p>
+                <div>
+                    <button id="subtract">-</button>
+                    <input type="number" value="0">
+                    <button id="add">+</button>
+                </div>
+            </p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <p class="mains" id="dessert">Dessert</p>
+    <p class="t_description">Dessert is a course that concludes a meal.</p>
+    <div id="row">
+        {% for product in products %}
+        {% if product[3] == 'dessert' %}
+        <div class="column left">
+            <p class="dish">{{ product[1] }}</p>
+            <img src="/images/{{ product[2] }}" class="img">
+            <p class="discription">{{ product[5] }}</p>
+            </br>
+            <p class="price">Price: {{ product[4] }}Rs</p>
+            </br>
+            <p>
+                <div>
+                    <button id="subtract">-</button>
+                    <input type="number" value="0">
+                    <button id="add">+</button>
+                </div>
+            </p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <p class="mains" id="beverages">Beverages</p>
+    <p class="t_description">A drink is a liquid intended for human consumption. In addition to their basic function of satisfying thirst, drinks play important roles in human culture.</p>
+    <div id="row">
+        
+        {% for product in products %}
+        {% if product[3] == 'beverages' %}
+        <div class="column left">
+            <p class="dish">{{ product[1] }}</p>
+            <img src="/images/{{ product[2] }}" class="img">
+            <p class="discription">{{ product[5] }}</p>
+            </br>
+            <p class="price">Price: {{ product[4] }}Rs</p>
+            </br>
+            <p>
+                <div>
+                    <button class="sub_add cd-add-to-cart js-cd-add-to-cart" id="subtract_{{products[i][0]}}">-</button>
+                    <input type="number" value="0" id="qty_{{products[i][0]}}">
+                    <button class="sub_add cd-add-to-cart js-cd-add-to-cart" id="add_{{products[i][0]}}" onclick="js_fn('{{products[i][1]}}', '{{products[i][4]}}', '{{products[i][2]}}')">+</button>
+                </div>
+            </p>
+        </div>
+        {% endif %}
+        {% endfor %}
+        -->

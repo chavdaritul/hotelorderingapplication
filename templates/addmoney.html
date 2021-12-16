@@ -1,0 +1,218 @@
+<head>
+    <style>
+        .img{
+            width: 20%;
+            height: auto;
+        }
+        .form_data{
+            font-size: 3rem;
+            font-family: Bebas Neue;
+            color: #ffd000;
+            text-align: center;
+        }
+        .info-table{
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            outline: none;
+            color: black;
+            font-size: 2rem;
+            transition: 0.6s;
+        }
+        a:hover{
+            color: #ffd000;
+        }
+        .add-money{
+            margin-left: auto;
+            margin-right: auto;
+            width: 75%;
+            background-color: #ffd000;
+            font-family: Bebas Neue;
+            border-radius: 50px;
+            transition: 0.6s;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+        .add-money:hover{
+            background-color: black;
+            color: #ffd000;
+            font-family: Bebas Neue;
+            border-radius: 50px;
+        }
+        input[type=text], input[type=password]{
+            width: 100%;
+            height: 50px;
+            border-radius: 50px;
+            border: none;
+            background-color: rgb(242, 242, 242);
+            color: grey;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-family: Bebas Neue;
+            font-size: 1.4rem;
+            outline: none;
+        }
+        input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=submit]{
+            width: 30%;
+            height: 50px;
+            border-radius: 50px;
+            border: none;
+            background-color: #ffd000;
+            color: black;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-family: Bebas Neue;
+            font-size: 1.4rem;
+            outline: none;
+            transition: 0.6s;
+        }
+        input[type=submit]:hover{
+            background-color: black;
+            color: #ffd000;
+        }
+    </style>
+</head>
+{% extends "customer_header.html" %}
+{% block content %}
+    {% if addmoney == 'Saving Account' %}
+        </br></br></br></br></br></br></br>
+        <form method="post" action="">
+            <table class="info-table">
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <th colspan="2">
+                        <p class='form_data'><img src="/images/wallet.png" class="img"></p>
+                    </th>
+                </tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">
+                    {% for message in get_flashed_messages() %}
+                        <table class="table_error">
+                            <tr>
+                                <th><img src="/images/error.png" class='error'></th>
+                                <th><p class="message" style="color: #FF5440;">{{ message }}</p></th>
+                            </tr>
+                        </table>
+                    {% endfor %}
+                </th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>Balance : </p>
+                    </td>
+                    <td>
+                        <p class='form_data'>{{ balance [0][2] }} Rs</p>
+                    </td>
+                </tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>Amount : </p>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter Amount" name="bankamount">
+                    </td>
+                </tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>Account Number : </p>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter Account Number" name="banknumber">
+                    </td>
+                </tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>Password : </p>
+                    </td>
+                    <td>
+                        <input type="password" name="bankpassword">
+                    </td>
+                </tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <td colspan="2">
+                        <p class='form_data'><input type="Submit" value="Add Money"></p>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    {% elif addmoney == 'Credit Card' %}
+        </br></br></br></br></br></br></br>
+        <form method="post" action="">
+            <table class="info-table">
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <th colspan="2">
+                        <p class='form_data'><img src="/images/wallet.png" class="img"></p>
+                    </th>
+                </tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">
+                    {% for message in get_flashed_messages() %}
+                        <table class="table_error">
+                            <tr>
+                                <th><img src="/images/error.png" class='error'></th>
+                                <th><p class="message" style="color: #FF5440;">{{ message }}</p></th>
+                            </tr>
+                        </table>
+                    {% endfor %}
+                </th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>Balance : </p>
+                    </td>
+                    <td>
+                        <p class='form_data'>{{ balance [0][2] }} Rs</p>
+                    </td>
+                </tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>Amount : </p>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter Amount" name="cardamount">
+                    </td>
+                </tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>Card Number : </p>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter Card Number" name="cardnumber">
+                    </td>
+                </tr>
+                <tr class='tr-tb-dta'>
+                    <td>
+                        <p class='form_data'>CVV : </p>
+                    </td>
+                    <td>
+                        <input type="password" placeholder="XXX" name="cardcvv">
+                    </td>
+                </tr>
+                <tr><th colspan="2">&nbsp;</th></tr>
+                <tr class='tr-tb-dta'>
+                    <td colspan="2">
+                        <p class='form_data'><input type="Submit" value="Add Money"></p>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+{% endblock content%}
