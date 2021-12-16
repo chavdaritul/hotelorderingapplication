@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2021 at 10:00 AM
+-- Generation Time: Dec 16, 2021 at 07:27 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -24,6 +24,53 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bank_details`
+--
+
+CREATE TABLE `bank_details` (
+  `id` int(225) NOT NULL,
+  `emailid` varchar(225) NOT NULL,
+  `account_no` varchar(225) NOT NULL,
+  `ifsc_code` varchar(225) NOT NULL,
+  `type` varchar(225) NOT NULL DEFAULT 'Saving Account',
+  `account_balance` varchar(225) NOT NULL,
+  `bank_password` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bank_details`
+--
+
+INSERT INTO `bank_details` (`id`, `emailid`, `account_no`, `ifsc_code`, `type`, `account_balance`, `bank_password`) VALUES
+(1, 'ritulchavda.rsc@gmail.com', '1234567890', 'SBIN003', 'Saving Account', '495000', 'bank');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card_details`
+--
+
+CREATE TABLE `card_details` (
+  `id` int(225) NOT NULL,
+  `emailid` varchar(225) NOT NULL,
+  `card_number` varchar(225) NOT NULL,
+  `card_name` varchar(225) NOT NULL,
+  `card_exp` varchar(225) NOT NULL,
+  `card_cvv` varchar(225) NOT NULL,
+  `card_balance` varchar(225) NOT NULL,
+  `type` varchar(225) NOT NULL DEFAULT 'Credit Card'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `card_details`
+--
+
+INSERT INTO `card_details` (`id`, `emailid`, `card_number`, `card_name`, `card_exp`, `card_cvv`, `card_balance`, `type`) VALUES
+(1, 'ritulchavda.rsc@gmail.com', '3333777788889999', 'Ritul Chavda', '06/23', '333', '185000', 'Credit Card');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customers`
 --
 
@@ -31,23 +78,22 @@ CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(225) NOT NULL,
   `emailid` varchar(225) NOT NULL,
-  `address` varchar(225) DEFAULT NULL,
-  `phone` varchar(225) DEFAULT NULL,
+  `address` varchar(225) NOT NULL,
+  `phone` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL,
   `dob` date DEFAULT NULL,
-  `document_verified` varchar(225) NOT NULL DEFAULT 'Not-Uploaded'
+  `document_verified` varchar(225) NOT NULL DEFAULT 'Not-Uploaded',
+  `balance` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `name`, `emailid`, `address`, `phone`, `password`, `dob`, `document_verified`) VALUES
-(8, 'demo', 'demo@demo.com', 'Kasavanahalli', '1234567890', '$2b$12$Dz39JbAnS6z7zjEQm70V6OXza72K5f0a8230/FqI8L8STctDIOC7W', NULL, 'Not-Uploaded'),
-(11, 'test', 'demo@demo.com', 'test123', '1425367890', '$2b$12$qgLFs5yucZ8cacraV0YckOHBmBJmDLK.ddt2mQb5ELQx.8aHDMs3u', NULL, 'Not-Uploaded'),
-(12, 'demo1', 'demo@gmail.com', '', '', '$2b$12$VIlPB4Ma9Xg08Nfxm8K9H.a7B7W4tE0raHHcP5z6HQpDUglC2PvcO', NULL, 'Not-Uploaded'),
-(13, 'ritul', 'ritul@gmail.com', 'Gandhinagar', '9714710162', '$2b$12$4t1p3QzWs2QkdVInv5jIrOEcwT92jlDZOawS4hHGtDAIlk3oL/tUm', NULL, 'Verified'),
-(14, 'ritulchavda', 'ritulchavda@gmail.com', 'Bengaluru, Karnataka', '1234567890', '$2b$12$twILL5/XnjZ6N/czBvFpc.9dXkpoP/q8QW8klKqr6bxHWyEcIV0U2', '2021-12-09', 'Verified');
+INSERT INTO `customers` (`id`, `name`, `emailid`, `address`, `phone`, `password`, `dob`, `document_verified`, `balance`) VALUES
+(1, 'Admin', 'admin@gmail.com', 'N/A', 'N/A', '$2b$12$NPtq414GwCizY1nVJnMNy.qEO5ZIycA0E0WOB2YpIARD4FINr7nIy', '0000-00-00', 'Not-Uploaded', ''),
+(2, 'Ritul Chavda', 'ritulchavda.rsc@gmail.com', ' Gandhinagar, Gujarat, 382024', '9714710162', '$2b$12$LtQrVVgF3bfyk/7YXqahd..t.e56PN5I4pdTgks/4OkpXjV4K0fAS', '2000-01-28', 'Verified', '25000'),
+(17, 'Demo Test', 'demo@gmail.com', 'Bengaluru', '9710027200', '$2b$12$MTWgVbI6mJwfWFCTpwsBCua4dvwN5aa9G7FR8OPOAyyGCL2n6R7.2', '2000-01-28', 'Verified', '');
 
 -- --------------------------------------------------------
 
@@ -92,6 +138,18 @@ INSERT INTO `menu` (`pid`, `name`, `image`, `category`, `price`, `description`) 
 --
 
 --
+-- Indexes for table `bank_details`
+--
+ALTER TABLE `bank_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `card_details`
+--
+ALTER TABLE `card_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
@@ -108,10 +166,22 @@ ALTER TABLE `menu`
 --
 
 --
+-- AUTO_INCREMENT for table `bank_details`
+--
+ALTER TABLE `bank_details`
+  MODIFY `id` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `card_details`
+--
+ALTER TABLE `card_details`
+  MODIFY `id` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -123,11 +193,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-CREATE TABLE `hotel_ordering_application`.`items`
-( `Id` INT NOT NULL ,
-`Name` VARCHAR(20) NOT NULL ,
-`Description` VARCHAR(250) NOT NULL ,
-`Price` INT NOT NULL ,
-`ImagePath` VARCHAR(100) NOT NULL ,
-PRIMARY KEY (`Id`)) ENGINE = InnoDB;
