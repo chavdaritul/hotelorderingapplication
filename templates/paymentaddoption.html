@@ -49,7 +49,7 @@
 {% block content %}
 </br></br></br></br></br></br></br>
 </br></br></br></br></br></br></br>
-<form method="post" action="" enctype="multipart/form-data">
+<form method="post" action="">
     <table class="info-table">
         <tr><th colspan="2">&nbsp;</th></tr>
         <tr><th colspan="2">&nbsp;</th></tr>
@@ -75,16 +75,16 @@
         </tr>
         <tr><th colspan="2">&nbsp;</th></tr>
         <tr><th colspan="2">&nbsp;</th></tr>
-        {% if data[0][2] != '' and (checkcardbal != None or checkbankbal != None) %}
-            <tr class='tr-tb-dta'>
-                <td colspan="2">
-                    <p class='form_data'><div class="add-money"><a href="/paymentoption">Add Money to Wallet</a></div></p>
-                </td>
-        {% endif %}
         <tr class='tr-tb-dta'>
             <td colspan="2">
-                <p class='form_data'><div class="add-money"><a href="/paymentadd">New Payment Account</a></div></p>
+                <p class='form_data'><div class="add-money"><a href="{{ url_for('addmoneyoption', addmoneyoption='Saving Account') }}">Add Saving Account</a></div></p>
             </td>
+        </tr>
+        <tr class='tr-tb-dta'>
+            <td colspan="2">
+                <p class='form_data'><div class="add-money"><a href="{{ url_for('addmoneyoption', addmoneyoption='Credit Card') }}">Add Credit Card</a></div></p>
+            </td>
+        </tr>
         <tr><th colspan="2">&nbsp;</th></tr>
     </table>
 </form>

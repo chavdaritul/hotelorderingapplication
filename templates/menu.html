@@ -3,6 +3,7 @@
     <link rel="stylesheet" type="text/css" href="/css/cart.css">
     <link rel="stylesheet" type="text/css" href="/css/menu.css">
 </head>
+
 {% if session.get('id') == None %}
     {% extends "main_header.html" %}
 {% else %}
@@ -10,7 +11,26 @@
 {% endif %}
 {% block content %}
 </br></br></br></br></br>
-
+<div style="margin-left: 35%;">
+<form method="POST">
+    <input type="search" placeholder='Search' id="itemSearch" name="itemSearch" style="padding-left: 2%; width: 50%; height: 6%; border-radius: 50px; border: none; background-color: rgb(223, 223, 223); font-family: Bebas Neue; font-size: 1.3em; text-decoration: none;">
+    <input type="submit" style="transform: translate(-100%); border-radius: 50px; background-color: #ffd000; height: 6%; width: 15%; border: none;">
+</form>
+</div>
+</br>
+{% for message in get_flashed_messages() %}
+<table class="table_info">
+    <tr>
+        <th><img src="./images/info.png" class='info'></th>
+        <th><p class="message" style="color: #008FFF;">{{ message }}</p></th>
+    </tr>
+</table>
+{% endfor %}
+</br>
+<form method="GET">
+    <button name="Display All" type="submit" style="margin-left: 43%; border-radius: 50px; background-color: #ffd000; height: 6%; width: 15%; border: none;">Display All</button>
+</form>
+</br>
 {% for i in range(products|length) %}
     {% if (i == 0)  %}
     <p class="category">{{ products[i][3].upper() }}</p>
@@ -35,41 +55,40 @@
 {% endfor %}
 </br>
 </br>
-<a href="#0" class="cd-add-to-cart js-cd-add-to-cart" data-price="25.99">Add To Cart</a>
-<div class="cd-cart cd-cart--empty js-cd-cart">
-    <a href="#0" class="cd-cart__trigger text-replace">
-        Cart
-        <ul class="cd-cart__count"> <!-- cart items count -->
-            <li>0</li>
-            <li>0</li>
-        </ul> <!-- .cd-cart__count -->
-    </a>
+<form method="POST" id="cartCheckout">
+    <div class="cd-cart cd-cart--empty js-cd-cart">
+        <a href="#0" class="cd-cart__trigger text-replace">
+            Cart
+            <ul class="cd-cart__count"> <!-- cart items count -->
+                <li>0</li>
+                <li>0</li>
+            </ul> <!-- .cd-cart__count -->
+        </a>
 
-    <div class="cd-cart__content">
-        <div class="cd-cart__layout">
-            <header class="cd-cart__header">
-                <h2>Cart</h2>
-                <span class="cd-cart__undo">Item removed. <a href="#0">Undo</a></span>
-            </header>
+        <div class="cd-cart__content">
+            <div class="cd-cart__layout">
+                <header class="cd-cart__header">
+                    <h2>Cart</h2>
+                    <span class="cd-cart__undo">Item removed. <a href="#0">Undo</a></span>
+                </header>
 
-            <div class="cd-cart__body">
-                <ul>
-                    <!-- products added to the cart will be inserted here using JavaScript -->
-                </ul>
+                <div class="cd-cart__body">
+                    <ul>
+                        <!-- products added to the cart will be inserted here using JavaScript -->
+                    </ul>
+                </div>
+
+                <footer class="cd-cart__footer">
+                    <button class="cd-cart__checkout" type="submit" name="totalAmt" id="totalAmt" onclick="test()">
+
+                        0
+
+                    </button>
+                </footer>
             </div>
-
-            <footer class="cd-cart__footer">
-                <a href="#0" class="cd-cart__checkout">
-                    <em>Checkout - Rupees <span id="totalAmt">0</span>
-                        <!--<svg class="icon icon--sm" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><line stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="3" y1="12" x2="21" y2="12"/><polyline stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="15,6 21,12 15,18 "/></g>
-                        </svg>-->
-                    </em>
-                </a>
-            </footer>
-        </div>
-    </div> <!-- .cd-cart__content -->
-</div> <!-- cd-cart -->
-
+        </div> <!-- .cd-cart__content -->
+    </div> <!-- cd-cart -->
+</form>
 <script>
     var dish, price, image, qty
     function js_fn(n, p, i) {
@@ -125,7 +144,12 @@
         document.getElementById(qtyId).value = currentValue;
         document.getElementById('totalAmt').textContent = parseInt(document.getElementById('totalAmt').textContent)+parseInt(price);
     }
+    function test()
+    {
+        document.getElementById('totalAmt').value = document.getElementById('totalAmt').innerText
+    }
+
 </script>
 <script src="{{ url_for('static', filename='/scripts/util.js') }}"></script> <!-- util functions included in the CodyHouse framework -->
 <script src="{{ url_for('static', filename='/scripts/main.js') }}"></script>
-{% endblock content%}
+{% endblock content %}

@@ -57,29 +57,36 @@
                     {% if title == 'Customer' and session['id'] != None %}
                         <li><a href="/customer" class="active">Profile</a></li>
                         <li><a href="/menu">Menu</a></li>
-                        <li><a href="#">Order History</a></li>
+                        <li><a href="/orderHistory">Order History</a></li>
                         <li><a href="/payment">Payment</a></li>
                         <li><a href="/changepassword">Change Password</a></li>
                         <li><a href="/logout">Logout</a></li>
                     {% elif title == 'Menu' and session['id'] != None %}
                         <li><a href="/customer">Profile</a></li>
                         <li><a href="/menu" class="active">Menu</a></li>
-                        <li><a href="#">Order History</a></li>
+                        <li><a href="/orderHistory">Order History</a></li>
                         <li><a href="/payment">Payment</a></li>
                         <li><a href="/changepassword">Change Password</a></li>
                         <li><a href="/logout">Logout</a></li>
                     {% elif title == 'Change Password' and session['id'] != None %}
                         <li><a href="/customer">Profile</a></li>
                         <li><a href="/menu">Menu</a></li>
-                        <li><a href="#">Order History</a></li>
+                        <li><a href="/orderHistory">Order History</a></li>
                         <li><a href="/payment">Payment</a></li>
                         <li><a href="/changepassword" class="active">Change Password</a></li>
                         <li><a href="/logout">Logout</a></li>
                     {% elif title == 'Payment' and session['id'] != None %}
                         <li><a href="/customer">Profile</a></li>
                         <li><a href="/menu">Menu</a></li>
-                        <li><a href="#">Order History</a></li>
+                        <li><a href="/orderHistory">Order History</a></li>
                         <li><a href="/payment" class="active">Payment</a></li>
+                        <li><a href="/changepassword">Change Password</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    {% elif title == 'Order History' and session['id'] != None %}
+                        <li><a href="/customer">Profile</a></li>
+                        <li><a href="/menu">Menu</a></li>
+                        <li><a href="/orderHistory" class="active">Order History</a></li>
+                        <li><a href="/payment">Payment</a></li>
                         <li><a href="/changepassword">Change Password</a></li>
                         <li><a href="/logout">Logout</a></li>
                     {% endif %}

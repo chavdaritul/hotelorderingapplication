@@ -1,0 +1,109 @@
+<head>
+    <style>
+        .img{
+            width: 20%;
+            height: auto;
+        }
+        input[type=text]{
+            width: 100%;
+            height: 50px;
+            border-radius: 50px;
+            border: none;
+            background-color: rgb(242, 242, 242);
+            color: grey;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-family: Bebas Neue;
+            font-size: 1.4rem;
+            outline: none;
+        }
+        input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=submit]{
+            width: 30%;
+            height: 50px;
+            border-radius: 50px;
+            border: none;
+            background-color: #ffd000;
+            color: black;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-family: Bebas Neue;
+            font-size: 1.4rem;
+            outline: none;
+            transition: 0.6s;
+        }
+        input[type=submit]:hover{
+            background-color: black;
+            color: #ffd000;
+        }
+        .form_data{
+            font-size: 1.4rem;
+            font-family: Bebas Neue;
+            color: #ffd000;
+            text-align: center;
+        }
+        .info-table{
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        span{
+            font-family: Bebas Neue;
+        }
+    </style>
+</head>
+{% extends "customer_header.html" %}
+{% block content %}
+</br></br></br></br></br></br></br>
+<form method="POST" action="">
+    <table class="info-table">
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr class='tr-tb-dta'>
+            <th colspan="2">
+                <p class='form_data'><img src="/images/checkout.png" class="img"></p>
+            </th>
+        </tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr class='tr-tb-dta'>
+            <td>
+                <p class='form_data'>Balance: </p>
+            </td>
+            <td>
+                <input type="text" value="{{ available_bal }}" name="balance" disabled>
+            </td>
+        </tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr class='tr-tb-dta'>
+            <td>
+                <p class='form_data'>Email ID: </p>
+            </td>
+            <td>
+                <input type="text" value="{{ emailid }}" name="emailid" disabled>
+            </td>
+        </tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr class='tr-tb-dta'>
+            <td>
+                <p class='form_data'>Total Payment: </p>
+            </td>
+            <td>
+                <input type="text" value="{{ amount }}" name="amount" disabled>
+            </td>
+        </tr>
+        <tr><th colspan="2">&nbsp;</th></tr>
+        <tr class='tr-tb-dta'>
+            <td colspan="2">
+                <p class='form_data'><input type="Submit" value="Checkout"></p>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock content %}
