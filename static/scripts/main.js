@@ -34,8 +34,9 @@
 				if(event.target == cart[0]) { // close cart when clicking on bg layer
 					toggleCart(true);
 				} else if (event.target.closest('.cd-cart__delete-item')) { // remove product from cart
-					event.preventDefault();
-					removeProduct(event.target.closest('.cd-cart__product'));
+					id = event.target.id
+					id = id.replace("cart_delete-item", "")
+					removeItemFromCart(id)
 				}
 			});
 
@@ -63,6 +64,16 @@
 			});
 		};
 
+		function removeItemFromCart(id){
+			qty = document.getElementById("cart_qty_"+id).value
+			price = document.getElementById("cart_price_"+id).innerText
+			document.getElementById('totalAmt').textContent = parseInt(document.getElementById('totalAmt').textContent)- (parseInt(price)*parseInt(qty))
+			document.getElementById("cart_product_"+id).remove()
+			document.getElementById("qty_"+id).value = 0
+			var cartIsEmpty = Util.hasClass(cart[0], 'cd-cart--empty');
+			updateCartCount(cartIsEmpty, -1);
+		}
+
 		function addToCart(event) {
 
 			event.preventDefault();
@@ -86,8 +97,7 @@
 			Util.removeClass(cart[0], 'cd-cart--empty');
 		};
 
-		function addValuesToProduct(target)
-		{
+		function addValuesToProduct(target) {
 			document.getElementById('cart_dish_'+id).textContent = dish
 			document.getElementById('cart_price_'+id).textContent = price
 			document.getElementById('cart_qty_'+id).value = qty
@@ -121,7 +131,7 @@
 			// you should also check if the product was already in the cart -> if it is, just update the quantity
 			console.log(price)
 			productId = productId + 1;
-			var productAdded = '<li class="cd-cart__product" id="cart_product_'+id+'"><div class="cd-cart__image"><a href="#0"><img src="/images/'+image+'" alt="placeholder"></a></div><div class="cd-cart__details"><h3 class="truncate"><p class="cart_dish" id="cart_dish_'+id+'"> </p></h3><span class="cd-cart__price" id="cart_price_'+id+'"></span><div class="cd-cart__actions"><a href="#0" class="cd-cart__delete-item">Delete</a><div class="cd-cart__quantity"><label style="font-size: 20px;">Qty</label><button class="cart_sub_add cd-add-to-cart js-cd-add-to-cart" id="cart_subtract_'+id+'" onclick="cartSubButton(this.id)">-</button><input class="cart-input" type="number" id="cart_qty_'+id+'"><button class="cart_sub_add cd-add-to-cart js-cd-add-to-cart" id="cart_add_'+id+'" onclick="cartAddButton(this.id)">+</button></div></div></div></li>';
+			var productAdded = '<li class="cd-cart__product" id="cart_product_'+id+'"><div class="cd-cart__image"><a href="#0"><img src="/images/'+image+'" alt="placeholder"></a></div><div class="cd-cart__details"><h3 class="truncate"><p class="cart_dish" id="cart_dish_'+id+'"> </p></h3><span class="cd-cart__price" id="cart_price_'+id+'"></span><div class="cd-cart__actions"><a href="#0" class="cd-cart__delete-item" id="cart_delete-item'+id+'">Delete</a><div class="cd-cart__quantity"><label style="font-size: 20px;">Qty</label><button class="cart_sub_add cd-add-to-cart js-cd-add-to-cart" id="cart_subtract_'+id+'" onclick="cartSubButton(this.id)">-</button><input class="cart-input" type="number" id="cart_qty_'+id+'"><button class="cart_sub_add cd-add-to-cart js-cd-add-to-cart" id="cart_add_'+id+'" onclick="cartAddButton(this.id)">+</button></div></div></div></li>';
 			cartList.insertAdjacentHTML('beforeend', productAdded);
 
 		};
@@ -129,7 +139,8 @@
 		function removeProduct(product) {
 			if(cartTimeoutId) clearInterval(cartTimeoutId);
 			removePreviousProduct(); // prduct previously deleted -> definitively remove it from the cart
-			
+			var deletedProduct = cartList.getElementsByClassName('cd-cart__product--deleted');
+			if(deletedProduct.length > 0 ) deletedProduct[0].remove();
 			var topPosition = product.offsetTop,
 				productQuantity = Number(product.getElementsByTagName('select')[0].value),
 				productTotPrice = Number((product.getElementsByClassName('cd-cart__price')[0].innerText).replace('$', '')) * productQuantity;
@@ -150,8 +161,8 @@
 		};
 
 		function removePreviousProduct() { // definitively removed a product from the cart (undo not possible anymore)
-			var deletedProduct = cartList.getElementsByClassName('cd-cart__product--deleted');
-			if(deletedProduct.length > 0 ) deletedProduct[0].remove();
+			//var deletedProduct = cartList.getElementsById('cd-cart__product--deleted');
+			//if(deletedProduct.length > 0 ) deletedProduct[0].remove();
 		};
 
 		function updateCartCount(emptyCart, quantity) {
@@ -210,5 +221,8 @@
 			cartCountItems[1].innerText = quantity+1;
 		};
 
+
+
   }
 })();
+
