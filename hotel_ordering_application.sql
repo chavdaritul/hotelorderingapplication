@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 07:27 AM
+-- Generation Time: Jan 17, 2022 at 04:58 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -42,7 +42,7 @@ CREATE TABLE `bank_details` (
 --
 
 INSERT INTO `bank_details` (`id`, `emailid`, `account_no`, `ifsc_code`, `type`, `account_balance`, `bank_password`) VALUES
-(1, 'ritulchavda.rsc@gmail.com', '1234567890', 'SBIN003', 'Saving Account', '495000', 'bank');
+(1, 'ritulchavda.rsc@gmail.com', '1234567890', 'SBI002', 'Saving Account', '87068', '123');
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE `card_details` (
 --
 
 INSERT INTO `card_details` (`id`, `emailid`, `card_number`, `card_name`, `card_exp`, `card_cvv`, `card_balance`, `type`) VALUES
-(1, 'ritulchavda.rsc@gmail.com', '3333777788889999', 'Ritul Chavda', '06/23', '333', '185000', 'Credit Card');
+(1, 'ritulchavda.rsc@gmail.com', '0000111122223333', 'Chavda Ritul', '07/21', '111', '100000', 'Credit Card');
 
 -- --------------------------------------------------------
 
@@ -92,8 +92,8 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `name`, `emailid`, `address`, `phone`, `password`, `dob`, `document_verified`, `balance`) VALUES
 (1, 'Admin', 'admin@gmail.com', 'N/A', 'N/A', '$2b$12$NPtq414GwCizY1nVJnMNy.qEO5ZIycA0E0WOB2YpIARD4FINr7nIy', '0000-00-00', 'Not-Uploaded', ''),
-(2, 'Ritul Chavda', 'ritulchavda.rsc@gmail.com', ' Gandhinagar, Gujarat, 382024', '9714710162', '$2b$12$LtQrVVgF3bfyk/7YXqahd..t.e56PN5I4pdTgks/4OkpXjV4K0fAS', '2000-01-28', 'Verified', '25000'),
-(17, 'Demo Test', 'demo@gmail.com', 'Bengaluru', '9710027200', '$2b$12$MTWgVbI6mJwfWFCTpwsBCua4dvwN5aa9G7FR8OPOAyyGCL2n6R7.2', '2000-01-28', 'Verified', '');
+(2, 'Ritul Chavda', 'ritulchavda.rsc@gmail.com', 'Bengaluru', '9714710162', '$2b$12$TeEIc2jFyszkeiwqSGa4Ou0V3864qSZhXfQKzYHPruMkomqYa/Pee', '2000-01-28', 'Not-Verified', '20000'),
+(17, 'Demo Test', 'demo@gmail.com', 'Bengaluru, Karnataka', '9710027200', '$2b$12$E.lFsSjE63/4h5jzTofiDulIW0l4TxwZ..T9AJ7IZ8piW4YtCdTDq', '2000-01-28', 'Verified', '');
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`pid`, `name`, `image`, `category`, `price`, `description`) VALUES
 (1, 'Pasta', 'pasta.jpg', 'starter', 150, 'Pasta is a type of food typically made from an unleavened dough of wheat flour mixed with water or eggs, and formed into sheets or other shapes, then cooked by boiling or baking.'),
-(2, 'Pizza', 'pizza.jpg', 'main', 350, 'Pizza is a dish of Italian origin consisting of a usually round, flat base of leavened wheat-based dough topped with tomatoes, cheese, and often various other ingredients.'),
+(2, 'Pizza', 'pizza.jpg', 'main', 350, 'Pizza is a dish of Italian origin consisting of a usually round, flat base of leavened wheat-based dough topped with cheese, and often various other ingredients.'),
 (3, 'Dosa', 'dosa.jpg', 'main', 200, 'A dosa is a thin pancake or crepe originating from South India'),
 (4, 'Tomato Soup', 'tomato_soup.jpg', 'starter', 100, 'Tomato soup is a soup with tomatoes as the primary ingredient.'),
 (5, 'Salad', 'salad.jpg', 'starter', 100, 'A salad is a dish consisting of mixed pieces of food, typically with at least one raw ingredient.'),
@@ -132,6 +132,40 @@ INSERT INTO `menu` (`pid`, `name`, `image`, `category`, `price`, `description`) 
 (15, 'Smoothies', 'smoothies.png', 'beverages', 100, 'A smoothie or smoothie is a drink made by puréeing fruit and vegetables in a blender.'),
 (16, 'Thali', 'thali.jpg', 'main', 200, 'Indian food consisting of different kinds of curry and more.'),
 (17, 'Lasagne', 'lasagna.png', 'main', 150, 'Lasagne are a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderhistory`
+--
+
+CREATE TABLE `orderhistory` (
+  `Id` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL,
+  `ItemId` int(11) NOT NULL,
+  `Qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orderhistory`
+--
+
+INSERT INTO `orderhistory` (`Id`, `orderId`, `ItemId`, `Qty`) VALUES
+(2, 1, 16, 2),
+(2, 1, 2, 1),
+(2, 1, 15, 5),
+(2, 1, 3, 1),
+(2, 2, 14, 1),
+(2, 2, 4, 1),
+(2, 2, 13, 1),
+(2, 3, 5, 2),
+(2, 3, 12, 2),
+(2, 3, 6, 2),
+(2, 3, 11, 2),
+(2, 4, 7, 1),
+(2, 4, 10, 1),
+(2, 4, 9, 1),
+(2, 5, 8, 6);
 
 --
 -- Indexes for dumped tables

@@ -1,6 +1,11 @@
+import email
+from hmac import new
+from re import S
+import random
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
+from werkzeug.urls import url_encode
 import yaml
 from werkzeug.utils import secure_filename
 import os
@@ -38,18 +43,102 @@ def home():
 def cart():
     return render_template('cart.html')
 
-@app.route('/menu')
+@app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    try:
-        title = 'Menu'
+    if request.method == 'GET':
+        try:
+            title = 'Menu'
+            cur = mysql.connection.cursor()
+            cur.execute('Select `pid`, `name`, `image`, `category`, `price`, `description` from menu ORDER BY category')
+            rows = cur.fetchall()
+            return render_template('menu.html', products = rows, title=title)
+        except Exception as e:
+            print(e)
+        finally:
+            cur.close()
+    elif request.method == 'POST':
+        if 'itemSearch' in request.form:
+            searchDetails = request.form
+            searchWord = '%'+searchDetails['itemSearch']+'%'
+            try:
+                title = 'Menu'
+                cur = mysql.connection.cursor()
+                cur.execute("Select `pid`, `name`, `image`, `category`, `price`, `description` from menu where name like '%s' ORDER BY category" % searchWord)
+                rows = cur.fetchall()
+                if len(rows) == 0:
+                    flash('Search item '+searchDetails['itemSearch']+ ' not found')
+                    try:
+                        title = 'Menu'
+                        cur = mysql.connection.cursor()
+                        cur.execute('Select `pid`, `name`, `image`, `category`, `price`, `description` from menu ORDER BY category')
+                        rows = cur.fetchall()
+                        return render_template('menu.html', products = rows, title=title)
+                    except Exception as e:
+                        print(e)
+                    finally:
+                        cur.close()
+                else:
+                    return render_template('menu.html', products = rows, title=title)
+            except Exception as e:
+                print(e)
+            finally:
+                cur.close()
+        else:
+            cartDetails = request.form
+            totalAmount = cartDetails['totalAmt']
+            session['amount'] = totalAmount
+            return redirect(url_for('checkout'))
+
+
+@app.route('/orderHistory', methods=['GET'])
+def orderHistory():
+    if session.get('id') == None:
+        return redirect(url_for('login'))
+    else:
+        title = 'Order History'
         cur = mysql.connection.cursor()
-        cur.execute('Select `pid`, `name`, `image`, `category`, `price`, `description` from menu ORDER BY category')
-        rows = cur.fetchall()
-        return render_template('menu.html', products = rows, title=title)
-    except Exception as e:
-        print(e)
-    finally:
-        cur.close()
+        id = session['id']
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT o.Id, o.orderId, o.ItemId, o.Qty, m.name, m.image, m.description, m.price FROM orderHistory as o INNER join menu as m on m.pid = o.ItemId where o.id = '%s' order by orderId" % id)
+            data = cur.fetchall()
+            return render_template('orderHistory.html', data=data, title=title, usrid=session.get('id'))
+        except Exception as e:
+            print(e)
+        finally:
+            cur.close()
+
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if session.get('id') == None:
+        return redirect(url_for('login'))
+    else:
+        title = 'Menu'
+        status = 'Error'
+        cur = mysql.connection.cursor()
+        amount = session.get('amount')
+        emailid = session.get('emailid')
+        cur.execute("SELECT balance FROM customers where emailid=%s", [emailid])
+        data = cur.fetchall()
+        available_bal = data[0][0]
+        if request.method == 'POST':
+            if len(data[0][0]) != 0:
+                if int(available_bal) > int(amount):
+                    remain = int(available_bal)-int(amount)
+                    print(remain)
+                    cur.execute("UPDATE customers SET balance=%s WHERE emailid=%s", (str(remain), emailid))
+                    mysql.connection.commit()
+                    cur.close()
+                    flash('Order Placed')
+                    return redirect(url_for('menu'))
+                else:
+                    flash('Insufficient Balance. Add funds to proceed.')
+                    return redirect(url_for('menu'))
+            else:
+                flash('No Payment Method Added. Go to Payment to add one.')
+                return redirect(url_for('menu'))
+        return render_template('checkout.html', amount=amount, emailid=emailid, title=title, available_bal=available_bal)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -381,11 +470,36 @@ def payment():
         data = cur.fetchall()
         cur.execute("SELECT id, emailid FROM `bank_details` WHERE emailid='%s'" % session.get('emailid'))
         checkbankbal = cur.fetchall()
-        print(checkbankbal)
         cur.execute("SELECT id, emailid FROM `card_details` WHERE emailid='%s'" % session.get('emailid'))
         checkcardbal = cur.fetchall()
-        print(checkcardbal)
         return render_template('payment.html', title=title, data=data, checkbankbal=checkbankbal, checkcardbal=checkcardbal)
+
+@app.route('/paymentadd')
+def paymentadd():
+    if session.get('id') == None:
+        return redirect(url_for('login'))
+    else:
+        title = 'Payment'
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id, emailid, balance FROM `customers` WHERE id='%s'" % session.get('id'))
+        data = cur.fetchall()
+        cur.execute("SELECT id, emailid FROM `bank_details` WHERE emailid='%s'" % session.get('emailid'))
+        checkbankbal = cur.fetchall()
+        cur.execute("SELECT id, emailid FROM `card_details` WHERE emailid='%s'" % session.get('emailid'))
+        checkcardbal = cur.fetchall()
+        return render_template('paymentadd.html', title=title, data=data, checkbankbal=checkbankbal, checkcardbal=checkcardbal)
+
+
+@app.route('/paymentaddoption')
+def paymentaddoption():
+    if session.get('id') == None:
+        return redirect(url_for('login'))
+    else:
+        title = 'Payment'
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id, emailid, balance FROM `customers` WHERE id='%s'" % session.get('id'))
+        data = cur.fetchall()
+        return render_template('paymentaddoption.html', title=title, data=data)
 
 
 @app.route('/paymentoption')
@@ -398,6 +512,52 @@ def paymentoption():
         cur.execute("SELECT id, emailid, balance FROM `customers` WHERE id='%s'" % session.get('id'))
         data = cur.fetchall()
         return render_template('paymentoption.html', title=title, data=data)
+
+
+@app.route('/addmoneyoption/<addmoneyoption>', methods = ['GET', 'POST'])
+def addmoneyoption(addmoneyoption):
+    if session.get('id') == None:
+        return redirect(url_for('login'))
+    else:
+        title = 'Payment'
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id, emailid, balance FROM `customers` WHERE id='%s'" % session.get('id'))
+        bal = cur.fetchall()
+        addmoneyoption = addmoneyoption
+        if addmoneyoption == 'Saving Account':
+            cur.execute("SELECT * FROM `bank_details` WHERE emailid='%s'" % session.get('emailid'))
+            bankdetails = cur.fetchall()
+            if request.method == 'POST':
+                updatebank = request.form
+                bankaccnumber = updatebank['bankaccnumber']
+                bankifsccode = updatebank['bankifsccode']
+                bankpassword = updatebank['bankpassword']
+                cur.execute("UPDATE bank_details SET account_no=%s,ifsc_code=%s,type=%s,account_balance=%s,bank_password=%s where emailid=%s", (bankaccnumber, bankifsccode, 'Saving Account', random.randint(100000, 300000), bankpassword, session.get('emailid')))
+                mysql.connection.commit()
+                cur.close()
+                return redirect(url_for('payment'))
+            if (len(bankdetails) != 0):
+                return render_template('addmoneyoption.html', title=title, balance=bal, addmoneyoption=addmoneyoption, bankdetails=bankdetails)
+            else: 
+                return render_template('addmoneyoption.html', title=title, balance=bal, addmoneyoption=addmoneyoption, bankdetails=0)
+        elif addmoneyoption == 'Credit Card':
+            cur.execute("SELECT * FROM `card_details` WHERE emailid='%s'" % session.get('emailid'))
+            ccdetails = cur.fetchall()
+            if request.method == 'POST':
+                updatecard = request.form
+                cardnumber = updatecard['cardnumber']
+                cardname = updatecard['cardname']
+                cardexp = updatecard['cardexp']
+                cardcvv = updatecard['cardcvv']
+                cur.execute("UPDATE card_details SET card_number=%s,card_name=%s,card_exp=%s,card_cvv=%s,card_balance=%s WHERE emailid=%s", (cardnumber, cardname, cardexp, cardcvv, 100000, session.get('emailid')))
+                mysql.connection.commit()
+                cur.close()
+                return redirect(url_for('payment'))
+            if (len(ccdetails) != 0):
+                return render_template('addmoneyoption.html', title=title, balance=bal, addmoneyoption=addmoneyoption, ccdetails=ccdetails)
+            else: 
+                return render_template('addmoneyoption.html', title=title, balance=bal, addmoneyoption=addmoneyoption, ccdetails=0)
+        return render_template('addmoneyoption.html', title=title)
 
 
 @app.route('/addmoney/<addmoney>', methods = ['GET', 'POST'])
